@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WellNews - 健康ニュースのAI要約＆ながら聴きラジオ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #10B981 0%, #064E3B 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 10px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            border-radius: 28px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            font-size: 38px;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            color: #064E3B;
+            margin-bottom: 25px;
+            border-left: 5px solid #10B981;
+            padding-left: 12px;
+            font-weight: 700;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            background-color: #ECFDF5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 1px solid #D1FAE5;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text strong {
+            display: block;
+            color: #111827;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .feature-text span {
+            font-size: 14px;
+            color: #4B5563;
+            display: block;
+            line-height: 1.5;
+        }
+
+        /* スクリーンショットプレビューのスタイル */
+        .screenshot-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0 20px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+        }
+
+        .screenshot-gallery::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshot-gallery::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .screenshot-gallery::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .screenshot-item {
+            flex: 0 0 220px;
+            scroll-snap-align: start;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-btn {
+            display: block;
+            padding: 16px 20px;
+            background-color: #F3F4F6;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-align: center;
+            border: 1px solid #E5E7EB;
+        }
+
+        .link-btn:hover {
+            background-color: #E5E7EB;
+        }
+
+        .link-btn.primary {
+            background-color: #10B981;
+            color: #fff;
+            border-color: #10B981;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .link-btn.primary:hover {
+            background-color: #059669;
+            box-shadow: 0 4px 16px rgba(5, 150, 105, 0.3);
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- アプリのアイコン (新聞と心臓) -->
+        <div class="app-icon">📰</div>
+        <h1>WellNews</h1>
+        <p class="tagline">スマートに健康習慣をアップデート</p>
+
+        <!-- スクリーンショットギャラリー -->
+        <div class="card">
+            <h2>機能紹介（スクリーンショット）</h2>
+            <div class="screenshot-gallery">
+                <div class="screenshot-item">
+                    <img src="./screenshots/1_news_feed.png" alt="AIニュース要約">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./screenshots/2_health_radio.png" alt="健康ラジオながら聴き">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./screenshots/3_keywords.png" alt="関心キーワード">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./screenshots/4_bookmarks.png" alt="ブックマーク">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./screenshots/5_premium.png" alt="プレミアムプラン">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>主な特徴</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-text">
+                        <strong>AIによる健康ニュース要約</strong>
+                        <span>最新のヘルスケア情報をAIが要約。要点だけを短時間で確認できます。</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎙️</div>
+                    <div class="feature-text">
+                        <strong>健康ラジオで「ながら聴き」</strong>
+                        <span>移動中やウォーキング中も、音声読み上げで耳から快適に情報をインプット。</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔑</div>
+                    <div class="feature-text">
+                        <strong>関心ワードによるパーソナライズ</strong>
+                        <span>「睡眠」「サウナ」など、気になる単語を登録するだけで関連ニュースを自動抽出。</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔖</div>
+                    <div class="feature-text">
+                        <strong>ワンタップブックマーク</strong>
+                        <span>気になった記事は即座に保存。いつでもサクッと読み返せます。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="links">
+                <a href="support.html" class="link-btn primary">サポート・よくある質問</a>
+                <a href="privacy-policy.html" class="link-btn">プライバシーポリシー</a>
+                <a href="https://github.com/junya-prg/WellNews" target="_blank" rel="noopener noreferrer" class="link-btn">GitHubで見る</a>
+            </div>
+        </div>
+
+        <p class="footer">© 2026 WellNews App</p>
+    </div>
+</body>
+</html>
