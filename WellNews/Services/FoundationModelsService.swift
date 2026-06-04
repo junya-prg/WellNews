@@ -8,7 +8,9 @@
 
 import Foundation
 import Combine
+#if canImport(FoundationModels)
 import FoundationModels
+#endif
 
 /// ユーザーの健康プロフィール（おすすめ度計算用）
 struct UserHealthProfile {
@@ -47,7 +49,6 @@ enum FoundationModelsError: LocalizedError {
 // MARK: - Foundation Models実装
 
 /// Foundation Modelsを使用したAI処理サービス
-@available(iOS 26.0, macOS 26.0, *)
 @MainActor
 class FoundationModelsService: ObservableObject {
     /// 処理中かどうか
@@ -66,6 +67,9 @@ class FoundationModelsService: ObservableObject {
     
     /// 利用可能判定
     var isAvailable: Bool {
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return false
+        }
         if let cached = _isAvailableCache {
             return cached
         }
@@ -73,20 +77,32 @@ class FoundationModelsService: ObservableObject {
     }
     
     var isActuallyAvailable: Bool {
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return false
+        }
         return _isAvailableCache ?? false
     }
     
     /// AIの利用可能性チェック
     func checkAvailability() async -> Bool {
-        let available = SystemLanguageModel.default.isAvailable
-        print("🤖 Foundation Models isAvailable: \(available)")
-        _isAvailableCache = available
-        return available
+        #if canImport(FoundationModels)
+        if #available(iOS 26.0, macOS 26.0, *) {
+            let available = SystemLanguageModel.default.isAvailable
+            print("🤖 Foundation Models isAvailable: \(available)")
+            _isAvailableCache = available
+            return available
+        }
+        #endif
+        _isAvailableCache = false
+        return false
     }
     
     // MARK: - 要約生成
     
     func summarize(article: Article) async -> String {
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return article.description ?? String(localized: "要約を生成できません")
+        }
         guard _isAvailableCache == true else {
             return article.description ?? String(localized: "要約を生成できません")
         }
@@ -142,6 +158,7 @@ class FoundationModelsService: ObservableObject {
                 """
         }
 
+        #if canImport(FoundationModels)
         do {
             let session = LanguageModelSession(instructions: instructions)
             let response = try await session.respond(to: prompt)
@@ -150,11 +167,17 @@ class FoundationModelsService: ObservableObject {
             print("要約生成エラー: \(error)")
             return article.description ?? String(localized: "要約を生成できませんでした")
         }
+        #else
+        return article.description ?? String(localized: "要約を生成できません")
+        #endif
     }
     
     // MARK: - カテゴリ分類
     
     func categorize(article: Article) async -> ArticleCategory {
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return fallbackCategorize(article: article)
+        }
         guard _isAvailableCache == true else {
             return fallbackCategorize(article: article)
         }
@@ -202,6 +225,7 @@ class FoundationModelsService: ObservableObject {
                 """
         }
 
+        #if canImport(FoundationModels)
         do {
             let session = LanguageModelSession(instructions: instructions)
             let response = try await session.respond(to: prompt)
@@ -218,11 +242,17 @@ class FoundationModelsService: ObservableObject {
             print("カテゴリ分類エラー: \(error)")
             return fallbackCategorize(article: article)
         }
+        #else
+        return fallbackCategorize(article: article)
+        #endif
     }
     
     // MARK: - おすすめ度計算
     
     func calculateRelevance(article: Article, userProfile: UserHealthProfile?) async -> Double {
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return fallbackCalculateRelevance(article: article, userProfile: userProfile)
+        }
         guard _isAvailableCache == true, let userProfile = userProfile else {
             return fallbackCalculateRelevance(article: article, userProfile: userProfile)
         }
@@ -297,6 +327,7 @@ class FoundationModelsService: ObservableObject {
                 """
         }
 
+        #if canImport(FoundationModels)
         do {
             let session = LanguageModelSession(instructions: instructions)
             let response = try await session.respond(to: prompt)
@@ -315,6 +346,9 @@ class FoundationModelsService: ObservableObject {
             print("おすすめ度計算エラー: \(error)")
             return fallbackCalculateRelevance(article: article, userProfile: userProfile)
         }
+        #else
+        return fallbackCalculateRelevance(article: article, userProfile: userProfile)
+        #endif
     }
     
     // MARK: - 一括処理
@@ -408,6 +442,10 @@ class FoundationModelsService: ObservableObject {
     }
     
     private func testAIAvailability() async -> Bool {
+        #if canImport(FoundationModels)
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return false
+        }
         do {
             return try await withThrowingTaskGroup(of: Bool.self) { group in
                 group.addTask {
@@ -430,6 +468,9 @@ class FoundationModelsService: ObservableObject {
         } catch {
             return false
         }
+        #else
+        return false
+        #endif
     }
     
     private func processArticlesWithFallback(_ articles: [Article], userProfile: UserHealthProfile?) -> [Article] {

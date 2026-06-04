@@ -44,8 +44,11 @@
 		142A639B2FCF7308002D501F /* WellNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		199DC3290553756C98389A2A /* WellNewsWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WellNewsWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CAC9FDB3C3F01AB33F7E935 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4426A4954A5877712E151783 /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
 		5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
 		5DA5D1A419BD1D853BE39594 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		60FFE37B4E1333EEA09E49C6 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
+		636554FE156D568DE82AFDE8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
 		DC50713CB7ACBF262FECF730 /* Article.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Article.swift; path = WellNews/Models/Article.swift; sourceTree = "<group>"; };
 		EF99F7060F4859808E026494 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 				DC50713CB7ACBF262FECF730 /* Article.swift */,
 				097A289E3489D8F77808AF1D /* WellNewsWidget */,
 				79F41D895BAB13026D075FC8 /* WellNewsWidget */,
+				88E8592EC9C701268F6F7572 /* WellNewsWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +143,17 @@
 				FD7E2FF3C5E74E56D252BA9C /* Info.plist */,
 				C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */,
 			);
+			path = WellNewsWidget;
+			sourceTree = "<group>";
+		};
+		88E8592EC9C701268F6F7572 /* WellNewsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				60FFE37B4E1333EEA09E49C6 /* WellNewsWidget.swift */,
+				636554FE156D568DE82AFDE8 /* Info.plist */,
+				4426A4954A5877712E151783 /* WidgetAssets.xcassets */,
+			);
+			name = WellNewsWidget;
 			path = WellNewsWidget;
 			sourceTree = "<group>";
 		};
@@ -369,7 +384,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -427,7 +442,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -455,6 +470,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -490,6 +506,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

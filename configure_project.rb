@@ -63,7 +63,7 @@ widget_target.build_configurations.each do |config|
   config.build_settings['PRODUCT_NAME'] = 'WellNewsWidget'
   config.build_settings['WRAPPER_EXTENSION'] = 'appex'
   config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = 'jp.junya.WellNews.WellNewsWidget'
-  config.build_settings['DEVELOPMENT_TEAM'] = ''
+  config.build_settings['DEVELOPMENT_TEAM'] = '2595AXVHS5'
   config.build_settings['CODE_SIGN_ENTITLEMENTS'] = 'WellNewsWidget/WellNewsWidget.entitlements'
   config.build_settings['GENERATE_INFOPLIST_FILE'] = 'NO'
   config.build_settings['INFOPLIST_FILE'] = 'WellNewsWidget/Info.plist'
@@ -77,7 +77,8 @@ end
 
 main_target.build_configurations.each do |config|
   config.build_settings['CODE_SIGN_ENTITLEMENTS'] = 'WellNews/WellNews.entitlements'
-  config.build_settings['DEVELOPMENT_TEAM'] = ''
+  config.build_settings['DEVELOPMENT_TEAM'] = '2595AXVHS5'
+  config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0'
 end
 
 # 5. Set target dependencies
