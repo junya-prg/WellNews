@@ -34,3 +34,6 @@ xcshareddata/xcuserstate
 
 # OS X
 .DS_Store
+
+# Local App Store screenshots
+/screenshots/
