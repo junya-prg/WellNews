@@ -6,13 +6,68 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		087B5D76C3337CEFE52A857B /* WidgetAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */; };
+		9C3DA9710F45B6C950B6DD8B /* WellNewsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */; };
+		AF17BD3AB24DCF28B0BDB262 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50713CB7ACBF262FECF730 /* Article.swift */; };
+		B7C0F709233AE2EAD062A692 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2F06FEA14477D5B2EE04A045 /* GoogleMobileAds */; };
+		C0F8FAD85323AA5A6DC2A30A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA5D1A419BD1D853BE39594 /* Foundation.framework */; };
+		DB1545992DB56BD7658ED2E6 /* WellNewsWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 199DC3290553756C98389A2A /* WellNewsWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ACDA4917C37C968874A4E973 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 142A63932FCF7308002D501F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE402FA13FF542A3C4A5C972;
+			remoteInfo = WellNewsWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		588956168095A9E981D7D90A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				DB1545992DB56BD7658ED2E6 /* WellNewsWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		020BC5DE0DF535FE946550BC /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
 		142A639B2FCF7308002D501F /* WellNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		199DC3290553756C98389A2A /* WellNewsWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WellNewsWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CAC9FDB3C3F01AB33F7E935 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
+		5DA5D1A419BD1D853BE39594 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
+		DC50713CB7ACBF262FECF730 /* Article.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Article.swift; path = WellNews/Models/Article.swift; sourceTree = "<group>"; };
+		EF99F7060F4859808E026494 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
+		FD7E2FF3C5E74E56D252BA9C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		14009F792FD0107A00A0E312 /* Exceptions for "WellNews" folder in "WellNews" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 142A639A2FCF7308002D501F /* WellNews */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		142A639D2FCF7308002D501F /* WellNews */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				14009F792FD0107A00A0E312 /* Exceptions for "WellNews" folder in "WellNews" target */,
+			);
 			path = WellNews;
 			sourceTree = "<group>";
 		};
@@ -23,17 +78,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C0F709233AE2EAD062A692 /* GoogleMobileAds in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42B39C80F3DDD388089F7440 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0F8FAD85323AA5A6DC2A30A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		097A289E3489D8F77808AF1D /* WellNewsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				020BC5DE0DF535FE946550BC /* WellNewsWidget.swift */,
+				3CAC9FDB3C3F01AB33F7E935 /* Info.plist */,
+			);
+			path = WellNewsWidget;
+			sourceTree = "<group>";
+		};
+		0981521483B948F99A0F9D54 /* WellNewsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */,
+			);
+			path = WellNewsWidget;
+			sourceTree = "<group>";
+		};
 		142A63922FCF7308002D501F = {
 			isa = PBXGroup;
 			children = (
 				142A639D2FCF7308002D501F /* WellNews */,
 				142A639C2FCF7308002D501F /* Products */,
+				ADA1772D5DCE943E38DE84B2 /* Frameworks */,
+				0981521483B948F99A0F9D54 /* WellNewsWidget */,
+				DC50713CB7ACBF262FECF730 /* Article.swift */,
+				097A289E3489D8F77808AF1D /* WellNewsWidget */,
+				79F41D895BAB13026D075FC8 /* WellNewsWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -41,8 +127,35 @@
 			isa = PBXGroup;
 			children = (
 				142A639B2FCF7308002D501F /* WellNews.app */,
+				199DC3290553756C98389A2A /* WellNewsWidget.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		79F41D895BAB13026D075FC8 /* WellNewsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EF99F7060F4859808E026494 /* WellNewsWidget.swift */,
+				FD7E2FF3C5E74E56D252BA9C /* Info.plist */,
+				C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */,
+			);
+			path = WellNewsWidget;
+			sourceTree = "<group>";
+		};
+		ADA1772D5DCE943E38DE84B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0A818FD4245134191C7D83C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0A818FD4245134191C7D83C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5DA5D1A419BD1D853BE39594 /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,20 +168,40 @@
 				142A63972FCF7308002D501F /* Sources */,
 				142A63982FCF7308002D501F /* Frameworks */,
 				142A63992FCF7308002D501F /* Resources */,
+				588956168095A9E981D7D90A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7E8AA835030ACE99BD401255 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				142A639D2FCF7308002D501F /* WellNews */,
 			);
 			name = WellNews;
 			packageProductDependencies = (
+				2F06FEA14477D5B2EE04A045 /* GoogleMobileAds */,
 			);
 			productName = WellNews;
 			productReference = 142A639B2FCF7308002D501F /* WellNews.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DE402FA13FF542A3C4A5C972 /* WellNewsWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E0762F3F309AAEB5B61D1A7B /* Build configuration list for PBXNativeTarget "WellNewsWidget" */;
+			buildPhases = (
+				B7EABF735515AFCEF9901F12 /* Sources */,
+				42B39C80F3DDD388089F7440 /* Frameworks */,
+				8CF354EB5B487DD48D7D203B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WellNewsWidget;
+			productName = WellNewsWidget;
+			productReference = 199DC3290553756C98389A2A /* WellNewsWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -94,12 +227,16 @@
 			);
 			mainGroup = 142A63922FCF7308002D501F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				072DD845FC49384BE5A72588 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 142A639C2FCF7308002D501F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				142A639A2FCF7308002D501F /* WellNews */,
+				DE402FA13FF542A3C4A5C972 /* WellNewsWidget */,
 			);
 		};
 /* End PBXProject section */
@@ -109,6 +246,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF354EB5B487DD48D7D203B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				087B5D76C3337CEFE52A857B /* WidgetAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,9 +267,55 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B7EABF735515AFCEF9901F12 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C3DA9710F45B6C950B6DD8B /* WellNewsWidget.swift in Sources */,
+				AF17BD3AB24DCF28B0BDB262 /* Article.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7E8AA835030ACE99BD401255 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WellNewsWidget;
+			target = DE402FA13FF542A3C4A5C972 /* WellNewsWidget */;
+			targetProxy = ACDA4917C37C968874A4E973 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		08889333CB36A031DB116E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = WellNewsWidget/WellNewsWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2595AXVHS5;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WellNewsWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WellNewsWidget;
+				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.junya.WellNews.WellNewsWidget;
+				PRODUCT_NAME = WellNewsWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = appex;
+			};
+			name = Release;
+		};
 		142A63A42FCF7309002D501F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -251,13 +442,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WellNews/WellNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2595AXVHS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WellNews/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = audio;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -283,13 +477,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WellNews/WellNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2595AXVHS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WellNews/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = audio;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -309,6 +506,33 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		773613C016CD20CAB25F05EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_ENTITLEMENTS = WellNewsWidget/WellNewsWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2595AXVHS5;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = WellNewsWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WellNewsWidget;
+				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jp.junya.WellNews.WellNewsWidget;
+				PRODUCT_NAME = WellNewsWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = appex;
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -331,7 +555,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E0762F3F309AAEB5B61D1A7B /* Build configuration list for PBXNativeTarget "WellNewsWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08889333CB36A031DB116E5C /* Release */,
+				773613C016CD20CAB25F05EA /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		072DD845FC49384BE5A72588 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F06FEA14477D5B2EE04A045 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 072DD845FC49384BE5A72588 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 142A63932FCF7308002D501F /* Project object */;
 }
