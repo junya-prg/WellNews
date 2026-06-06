@@ -7,66 +7,67 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 # Setup paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROCESSED_DIR = os.path.join(BASE_DIR, 'screenshots', 'processed')
+RAW_DIR = os.path.join(BASE_DIR, "screenshots", "raw")
+PROCESSED_DIR = os.path.join(BASE_DIR, "screenshots", "processed")
 
-# Text definition
+# Text definitions for the screenshots
 SCREENSHOT_TEXTS = {
     1: {
-        "title": "AIが健康ニュースを\n要約",
-        "subtitle": "欲しい情報を瞬時にキャッチ"
+        "title": "AIが健康ニュースを要約",
+        "subtitle": "信頼できる情報から、欲しいトピックを瞬時にキャッチ"
     },
     2: {
-        "title": "健康ラジオで\n「ながら聴き」",
-        "subtitle": "プロの音声読み上げで情報吸収"
+        "title": "健康ラジオで「ながら聴き」",
+        "subtitle": "プロの音声読み上げ機能で、移動中も快適にインプット"
     },
     3: {
-        "title": "関心ワードで\nパーソナライズ",
-        "subtitle": "気になるワードで自動抽出"
+        "title": "関心ワードでパーソナライズ",
+        "subtitle": "気になるキーワードを登録して、自動でニュースを収集"
     },
     4: {
-        "title": "重要な記事を\nブックマーク",
-        "subtitle": "いつでもサクッと保存"
+        "title": "重要な記事をブックマーク",
+        "subtitle": "後から読み返したいニュースを、ワンタップで保存"
     },
     5: {
-        "title": "プレミアムで\nすべての制限解除",
-        "subtitle": "広告なしの快適なニュース体験へ"
+        "title": "プレミアムですべての制限解除",
+        "subtitle": "広告非表示＆すべての機能が使い放題の快適な体験へ"
     }
 }
 
-# Device configurations for App Store Connect landscape submissions
+# Device configurations for portrait App Store screenshots
 DEVICE_CONFIGS = [
     {
         "name": "6.7_inch",
-        "width": 2796,
-        "height": 1290,
-        "h_ratio": 0.82,
-        "title_size": 110,
-        "subtitle_size": 52,
-        "title_x": 180,
-        "title_y": 350,
-        "right_margin": 100
+        "width": 1290,
+        "height": 2796,
+        "title_size": 72,
+        "subtitle_size": 30,
+        "title_y": 220,
+        "subtitle_y": 330,
+        "phone_w": 940,
+        "phone_y": 460
     },
     {
         "name": "6.5_inch",
-        "width": 2778,
-        "height": 1284,
-        "h_ratio": 0.82,
-        "title_size": 110,
-        "subtitle_size": 52,
-        "title_x": 180,
-        "title_y": 350,
-        "right_margin": 100
+        "width": 1284,
+        "height": 2778,
+        "title_size": 72,
+        "subtitle_size": 30,
+        "title_y": 220,
+        "subtitle_y": 330,
+        "phone_w": 940,
+        "phone_y": 460
     },
     {
         "name": "5.5_inch",
-        "width": 2208,
-        "height": 1242,
-        "h_ratio": 0.74,
-        "title_size": 70,
-        "subtitle_size": 36,
-        "title_x": 120,
-        "title_y": 350,
-        "right_margin": 80
+        "width": 1242,
+        "height": 2208,
+        "title_size": 64,
+        "subtitle_size": 28,
+        "title_y": 160,
+        "subtitle_y": 250,
+        "phone_w": 800,
+        "phone_y": 360
     }
 ]
 
@@ -95,78 +96,72 @@ def get_font(size, is_bold=False):
                 continue
     return ImageFont.load_default()
 
+def create_fresh_background(width, height):
+    # Base gradient background (light mint #F0FDF4)
+    base = Image.new("RGBA", (width, height), (240, 253, 244, 255))
+    blob_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    blob_draw = ImageDraw.Draw(blob_layer)
+    
+    # Draw overlapping large soft color circles
+    blob_draw.ellipse([width - 800, -200, width + 400, 1000], fill=(187, 247, 208, 120)) # #bbf7d0 mint green
+    blob_draw.ellipse([-400, height // 2 - 600, 600, height // 2 + 400], fill=(186, 230, 253, 100)) # #bae6fd sky blue
+    blob_draw.ellipse([width - 700, height - 900, width + 300, height + 100], fill=(153, 246, 228, 110)) # #99f6e4 teal
+    blob_draw.ellipse([-300, -300, 500, 500], fill=(254, 240, 138, 70)) # #fef08a yellow
+    
+    # Apply Gaussian Blur to blend the blobs into a modern mesh gradient
+    blob_blurred = blob_layer.filter(ImageFilter.GaussianBlur(180))
+    background = Image.alpha_composite(base, blob_blurred)
+    return background
+
+def make_device_mockup(screen_image_path, bezel_width=24, corner_radius=76):
+    screen_img = Image.open(screen_image_path).convert("RGBA")
+    sw, sh = screen_img.size
+    
+    mw = sw + bezel_width * 2
+    mh = sh + bezel_width * 2
+    
+    mockup = Image.new("RGBA", (mw, mh), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(mockup)
+    
+    # Outer device bezel (Slate 900)
+    bezel_color = (15, 23, 42, 255)
+    draw.rounded_rectangle([0, 0, mw, mh], radius=corner_radius + bezel_width, fill=bezel_color)
+    
+    # Inner highlighting border (Slate 600)
+    inner_border_color = (71, 85, 105, 255)
+    draw.rounded_rectangle([2, 2, mw - 2, mh - 2], radius=corner_radius + bezel_width - 2, fill=None, outline=inner_border_color, width=2)
+    
+    # Screen mask for rounded corners
+    screen_mask = Image.new("L", (sw, sh), 0)
+    mask_draw = ImageDraw.Draw(screen_mask)
+    mask_draw.rounded_rectangle([0, 0, sw, sh], radius=corner_radius, fill=255)
+    
+    # Paste screen inside the mockup frame
+    mockup.paste(screen_img, (bezel_width, bezel_width), screen_mask)
+    return mockup
+
 def process_screenshot(index, config):
-    input_name = f"store_screenshot_{index}.png"
-    input_path = os.path.join(PROCESSED_DIR, input_name)
-    
-    if not os.path.exists(input_path):
-        print(f"❌ Error: {input_path} does not exist. Please make sure the 1024x1024 source image is located there.")
-        return False
-        
-    # Open original 1024x1024 image
-    img = Image.open(input_path).convert("RGBA")
-    
-    canvas_w = config["width"]
-    canvas_h = config["height"]
-    folder_name = config["name"]
+    width = config["width"]
+    height = config["height"]
+    device_name = config["name"]
     title_size = config["title_size"]
     subtitle_size = config["subtitle_size"]
-    title_x = config["title_x"]
     title_y = config["title_y"]
-    h_ratio = config["h_ratio"]
-    right_margin = config["right_margin"]
+    subtitle_y = config["subtitle_y"]
+    phone_w = config["phone_w"]
+    phone_y = config["phone_y"]
     
-    # 1. Sample gradient colors dynamically from the original image corners
-    color_top = img.getpixel((10, 10))
-    color_bottom = img.getpixel((1014, 1014))
-    
-    # Create the landscape canvas
-    canvas = Image.new("RGBA", (canvas_w, canvas_h), (0, 0, 0, 255))
+    # Check if raw screenshot exists
+    raw_img_path = os.path.join(RAW_DIR, f"raw_{index}.png")
+    if not os.path.exists(raw_img_path):
+        print(f"❌ Error: {raw_img_path} does not exist. Please make sure simulator screenshots are in the raw folder.")
+        return False
+        
+    # 1. Generate mesh gradient background
+    canvas = create_fresh_background(width, height)
     draw = ImageDraw.Draw(canvas)
     
-    # Draw horizontal gradient (left to right)
-    for x in range(canvas_w):
-        ratio = x / (canvas_w - 1)
-        r = int(color_top[0] + (color_bottom[0] - color_top[0]) * ratio)
-        g = int(color_top[1] + (color_bottom[1] - color_top[1]) * ratio)
-        b = int(color_top[2] + (color_bottom[2] - color_top[2]) * ratio)
-        draw.line([(x, 0), (x, canvas_h)], fill=(r, g, b, 255))
-        
-    # Add ambient glow layers to match the premium dark UI style
-    glow_layer = Image.new("RGBA", (canvas_w, canvas_h), (0, 0, 0, 0))
-    glow_draw = ImageDraw.Draw(glow_layer)
-    glow_draw.ellipse([-200, -200, 1000, 1000], fill=(16, 185, 129, 35))
-    glow_draw.ellipse([canvas_w - 1200, canvas_h - 1200, canvas_w + 200, canvas_h + 200], fill=(52, 211, 153, 25))
-    glow_layer = glow_layer.filter(ImageFilter.GaussianBlur(150))
-    canvas = Image.alpha_composite(canvas, glow_layer)
-    
-    # 2. Crop the phone mockup part (bottom of 1024x1024 image)
-    # The text is in the top 300px, so we crop below y=300
-    phone_box = (0, 300, 1024, 1024)
-    phone_crop = img.crop(phone_box)
-    
-    # Scale phone height based on h_ratio to prevent border clipping
-    phone_h = int(canvas_h * h_ratio)
-    phone_w = int(phone_crop.width * (phone_h / phone_crop.height))
-    phone_resized = phone_crop.resize((phone_w, phone_h), Image.Resampling.LANCZOS)
-    
-    crop_w = phone_w
-    
-    # Create horizontal gradient mask to blend left edge of phone crop
-    mask = Image.new("L", (crop_w, phone_h), 255)
-    mask_draw = ImageDraw.Draw(mask)
-    blend_x = int(crop_w * 0.18)
-    for x in range(blend_x):
-        alpha = int(255 * (x / float(blend_x)))
-        mask_draw.line([(x, 0), (x, phone_h)], fill=alpha)
-        
-    # Paste centered vertically and inset from the right edge
-    paste_x = canvas_w - crop_w - right_margin
-    paste_y = (canvas_h - phone_h) // 2
-    canvas.paste(phone_resized, (paste_x, paste_y), mask)
-    
-    # 3. Draw text on the left side
-    draw = ImageDraw.Draw(canvas)
+    # 2. Draw text
     text_info = SCREENSHOT_TEXTS.get(index)
     title = text_info["title"]
     subtitle = text_info["subtitle"]
@@ -174,31 +169,39 @@ def process_screenshot(index, config):
     title_font = get_font(title_size, is_bold=True)
     subtitle_font = get_font(subtitle_size, is_bold=False)
     
-    # Draw two-line title
-    title_lines = title.split("\n")
-    line_spacing = 15
-    current_y = title_y
-    for line in title_lines:
-        draw.text((title_x, current_y), line, fill=(255, 255, 255, 255), font=title_font)
-        bbox = draw.textbbox((0, 0), line, font=title_font)
-        line_h = bbox[3] - bbox[1]
-        current_y += line_h + line_spacing
-        
-    # Draw subtitle below title
-    subtitle_y = current_y + 40
-    draw.text((title_x, subtitle_y), subtitle, fill=(209, 250, 229, 255), font=subtitle_font)
+    # Center title
+    title_bbox = draw.textbbox((0, 0), title, font=title_font)
+    title_w = title_bbox[2] - title_bbox[0]
+    title_x = (width - title_w) // 2
+    draw.text((title_x, title_y), title, fill=(15, 23, 42, 255), font=title_font)
+    
+    # Center subtitle
+    subtitle_bbox = draw.textbbox((0, 0), subtitle, font=subtitle_font)
+    subtitle_w = subtitle_bbox[2] - subtitle_bbox[0]
+    subtitle_x = (width - subtitle_w) // 2
+    draw.text((subtitle_x, subtitle_y), subtitle, fill=(71, 85, 105, 255), font=subtitle_font)
+    
+    # 3. Compositing iPhone frame
+    phone = make_device_mockup(raw_img_path, bezel_width=24, corner_radius=76)
+    
+    # Scale phone mockup to fit device config
+    phone_h = int(phone.height * (phone_w / phone.width))
+    phone_resized = phone.resize((phone_w, phone_h), Image.Resampling.LANCZOS)
+    
+    paste_x = (width - phone_w) // 2
+    canvas.paste(phone_resized, (paste_x, phone_y), phone_resized)
     
     # 4. Save to device specific folder
-    out_dir = os.path.join(PROCESSED_DIR, folder_name)
+    out_dir = os.path.join(PROCESSED_DIR, device_name)
     os.makedirs(out_dir, exist_ok=True)
     output_path = os.path.join(out_dir, f"store_screenshot_{index}.png")
     
     canvas.save(output_path, "PNG")
-    print(f"✅ Generated [{folder_name}] screenshot: {output_path}")
+    print(f"✅ Generated [{device_name}] screenshot: {output_path}")
     return True
 
 def main():
-    print("🎨 Compositing premium 3D screenshots into App Store Landscape formats...")
+    print("🎨 Compositing premium portrait screenshots from raw simulator assets...")
     
     for config in DEVICE_CONFIGS:
         print(f"\n--- Generating for {config['name']} ({config['width']}x{config['height']}) ---")
