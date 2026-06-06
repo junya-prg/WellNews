@@ -34,42 +34,79 @@ SCREENSHOT_TEXTS = {
     }
 }
 
-# Device configurations for portrait App Store screenshots
+# Device configurations for portrait 3D App Store screenshots
 DEVICE_CONFIGS = [
     {
         "name": "6.7_inch",
         "width": 1290,
         "height": 2796,
-        "title_size": 72,
-        "subtitle_size": 30,
+        "title_size": 84,
+        "subtitle_size": 42,
         "title_y": 220,
-        "subtitle_y": 330,
-        "phone_w": 940,
-        "phone_y": 460
+        "subtitle_y": 340,
+        "phone_w": 1400,
+        "phone_y": 600
     },
     {
         "name": "6.5_inch",
         "width": 1284,
         "height": 2778,
-        "title_size": 72,
-        "subtitle_size": 30,
+        "title_size": 84,
+        "subtitle_size": 42,
         "title_y": 220,
-        "subtitle_y": 330,
-        "phone_w": 940,
-        "phone_y": 460
+        "subtitle_y": 340,
+        "phone_w": 1400,
+        "phone_y": 600
     },
     {
         "name": "5.5_inch",
         "width": 1242,
         "height": 2208,
-        "title_size": 64,
-        "subtitle_size": 28,
+        "title_size": 76,
+        "subtitle_size": 38,
         "title_y": 160,
-        "subtitle_y": 250,
-        "phone_w": 800,
-        "phone_y": 360
+        "subtitle_y": 270,
+        "phone_w": 1200,
+        "phone_y": 430
     }
 ]
+
+def solve_perspective(src_pts, dst_pts):
+    # Solves for coefficients a, b, c, d, e, f, g, h of perspective transform:
+    # x_src = (a*x_dst + b*y_dst + c) / (g*x_dst + h*y_dst + 1)
+    # y_src = (d*x_dst + e*y_dst + f) / (g*x_dst + h*y_dst + 1)
+    #
+    # Matrix form: A * X = B, where X = [a, b, c, d, e, f, g, h]^T
+    A = []
+    B = []
+    for (xs, ys), (xd, yd) in zip(src_pts, dst_pts):
+        A.append([xd, yd, 1, 0, 0, 0, -xs * xd, -xs * yd])
+        B.append(xs)
+        A.append([0, 0, 0, xd, yd, 1, -ys * xd, -ys * yd])
+        B.append(ys)
+        
+    n = len(B)
+    for i in range(n):
+        pivot_row = i
+        for r in range(i + 1, n):
+            if abs(A[r][i]) > abs(A[pivot_row][i]):
+                pivot_row = r
+        A[i], A[pivot_row] = A[pivot_row], A[i]
+        B[i], B[pivot_row] = B[pivot_row], B[i]
+        
+        pivot = A[i][i]
+        for r in range(i + 1, n):
+            factor = A[r][i] / pivot
+            for c in range(i, n):
+                A[r][c] -= factor * A[i][c]
+            B[r] -= factor * B[i]
+            
+    X = [0] * n
+    for i in range(n - 1, -1, -1):
+        sum_ax = sum(A[i][j] * X[j] for j in range(i + 1, n))
+        X[i] = (B[i] - sum_ax) / A[i][i]
+        
+    return tuple(X)
 
 def get_font(size, is_bold=False):
     if is_bold:
@@ -102,7 +139,7 @@ def create_fresh_background(width, height):
     blob_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     blob_draw = ImageDraw.Draw(blob_layer)
     
-    # Draw overlapping large soft color circles
+    # Draw overlapping large soft color circles to make a fresh mesh gradient
     blob_draw.ellipse([width - 800, -200, width + 400, 1000], fill=(187, 247, 208, 120)) # #bbf7d0 mint green
     blob_draw.ellipse([-400, height // 2 - 600, 600, height // 2 + 400], fill=(186, 230, 253, 100)) # #bae6fd sky blue
     blob_draw.ellipse([width - 700, height - 900, width + 300, height + 100], fill=(153, 246, 228, 110)) # #99f6e4 teal
@@ -182,12 +219,43 @@ def process_screenshot(index, config):
     draw.text((subtitle_x, subtitle_y), subtitle, fill=(71, 85, 105, 255), font=subtitle_font)
     
     # 3. Compositing iPhone frame
-    phone = make_device_mockup(raw_img_path, bezel_width=24, corner_radius=76)
+    bezel_width = 24
+    corner_radius = 76
+    phone = make_device_mockup(raw_img_path, bezel_width=bezel_width, corner_radius=corner_radius)
+    
+    # Target screen quad coordinates in the 1024x1024 mockup canvas
+    src_pts = [
+        (bezel_width, bezel_width),
+        (phone.width - bezel_width, bezel_width),
+        (phone.width - bezel_width, phone.height - bezel_width),
+        (bezel_width, phone.height - bezel_width)
+    ]
+    dst_pts = [
+        (472, 274),
+        (749, 290),
+        (572, 943),
+        (254, 878)
+    ]
+    
+    # Compute perspective coefficients
+    coeffs = solve_perspective(src_pts, dst_pts)
+    
+    # Warp the mockup phone in 3D perspective
+    warped_phone = phone.transform((1024, 1024), Image.PERSPECTIVE, coeffs, Image.Resampling.BICUBIC)
+    
+    # Crop to phone bounding box to allow exact sizing and alignment on the canvas
+    # Left edge: ~210, Top edge: ~230, Right edge: ~795, Bottom edge: ~970
+    phone_crop_box = (210, 230, 795, 970)
+    phone_cropped = warped_phone.crop(phone_crop_box)
+    
+    cropped_w = phone_crop_box[2] - phone_crop_box[0]
+    cropped_h = phone_crop_box[3] - phone_crop_box[1]
     
     # Scale phone mockup to fit device config
-    phone_h = int(phone.height * (phone_w / phone.width))
-    phone_resized = phone.resize((phone_w, phone_h), Image.Resampling.LANCZOS)
+    phone_h = int(cropped_h * (phone_w / cropped_w))
+    phone_resized = phone_cropped.resize((phone_w, phone_h), Image.Resampling.LANCZOS)
     
+    # Paste onto canvas
     paste_x = (width - phone_w) // 2
     canvas.paste(phone_resized, (paste_x, phone_y), phone_resized)
     
@@ -201,7 +269,7 @@ def process_screenshot(index, config):
     return True
 
 def main():
-    print("🎨 Compositing premium portrait screenshots from raw simulator assets...")
+    print("🎨 Compositing premium 3D tilted portrait screenshots from raw simulator assets...")
     
     for config in DEVICE_CONFIGS:
         print(f"\n--- Generating for {config['name']} ({config['width']}x{config['height']}) ---")
