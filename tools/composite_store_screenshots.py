@@ -11,7 +11,6 @@ CANVAS_HEIGHT = 2796
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROCESSED_DIR = os.path.join(BASE_DIR, 'screenshots', 'processed')
-DOCS_SS_DIR = os.path.join(BASE_DIR, 'docs', 'screenshots')
 
 # Text definition
 SCREENSHOT_TEXTS = {
@@ -35,15 +34,6 @@ SCREENSHOT_TEXTS = {
         "title": "プレミアムプランで制限解除",
         "subtitle": "広告なしの快適なニュース体験へ"
     }
-}
-
-# Web filename mapping
-WEB_FILENAMES = {
-    1: "1_news_feed.png",
-    2: "2_health_radio.png",
-    3: "3_keywords.png",
-    4: "4_bookmarks.png",
-    5: "5_premium.png"
 }
 
 def get_font(size, is_bold=False):
@@ -111,8 +101,8 @@ def process_screenshot(index):
     phone_box = (0, 300, 1024, 1024)
     phone_crop = img.crop(phone_box)
     
-    # Resize the phone crop to width 1600 (scale factor approx 1.56x)
-    scaled_w = 1600
+    # Resize the phone crop to width 2000 (perfectly balanced scale)
+    scaled_w = 2000
     scaled_h = int(phone_crop.height * (scaled_w / phone_crop.width))
     phone_resized = phone_crop.resize((scaled_w, scaled_h), Image.Resampling.LANCZOS)
     
@@ -121,15 +111,16 @@ def process_screenshot(index):
     phone_final = phone_resized.crop((crop_x, 0, crop_x + CANVAS_WIDTH, scaled_h))
     
     # 3. Create a vertical gradient transparency mask for the top transition
-    # Blends the top 200 pixels of the cropped phone background smoothly into the canvas background
+    # Blends the top 250 pixels of the cropped phone background smoothly into the canvas background
     mask = Image.new("L", (CANVAS_WIDTH, scaled_h), 255)
     mask_draw = ImageDraw.Draw(mask)
-    for y in range(200):
-        alpha = int(255 * (y / 200.0))
+    blend_y = min(250, int(scaled_h * 0.25))
+    for y in range(blend_y):
+        alpha = int(255 * (y / float(blend_y)))
         mask_draw.line([(0, y), (CANVAS_WIDTH, y)], fill=alpha)
         
-    # Paste the processed mockup onto the canvas
-    paste_y = CANVAS_HEIGHT - scaled_h
+    # Paste the processed mockup onto the canvas with a 150px bottom padding
+    paste_y = CANVAS_HEIGHT - scaled_h - 150
     canvas.paste(phone_final, (0, paste_y), mask)
     
     # 4. Draw texts at the top
@@ -160,13 +151,6 @@ def process_screenshot(index):
     # Save processed image (overwrite existing store_screenshot_X.png)
     canvas.save(input_path, "PNG")
     print(f"✅ Generated App Store screenshot: {input_path}")
-    
-    # Copy to web site screenshots folder
-    os.makedirs(DOCS_SS_DIR, exist_ok=True)
-    web_filename = WEB_FILENAMES.get(index)
-    web_path = os.path.join(DOCS_SS_DIR, web_filename)
-    canvas.save(web_path, "PNG")
-    print(f"➡️  Web site copy generated: {web_path}")
     return True
 
 def main():
