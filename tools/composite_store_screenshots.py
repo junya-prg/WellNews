@@ -39,28 +39,34 @@ DEVICE_CONFIGS = [
         "name": "6.7_inch",
         "width": 2796,
         "height": 1290,
+        "h_ratio": 0.82,
         "title_size": 110,
         "subtitle_size": 52,
         "title_x": 180,
-        "title_y": 350
+        "title_y": 350,
+        "right_margin": 100
     },
     {
         "name": "6.5_inch",
         "width": 2778,
         "height": 1284,
+        "h_ratio": 0.82,
         "title_size": 110,
         "subtitle_size": 52,
         "title_x": 180,
-        "title_y": 350
+        "title_y": 350,
+        "right_margin": 100
     },
     {
         "name": "5.5_inch",
         "width": 2208,
         "height": 1242,
-        "title_size": 80,
-        "subtitle_size": 38,
+        "h_ratio": 0.74,
+        "title_size": 70,
+        "subtitle_size": 36,
         "title_x": 120,
-        "title_y": 350
+        "title_y": 350,
+        "right_margin": 80
     }
 ]
 
@@ -107,6 +113,8 @@ def process_screenshot(index, config):
     subtitle_size = config["subtitle_size"]
     title_x = config["title_x"]
     title_y = config["title_y"]
+    h_ratio = config["h_ratio"]
+    right_margin = config["right_margin"]
     
     # 1. Sample gradient colors dynamically from the original image corners
     color_top = img.getpixel((10, 10))
@@ -137,27 +145,25 @@ def process_screenshot(index, config):
     phone_box = (0, 300, 1024, 1024)
     phone_crop = img.crop(phone_box)
     
-    # Scale crop to match canvas height
-    scaled_h = canvas_h
-    scaled_w = int(phone_crop.width * (scaled_h / phone_crop.height))
-    phone_resized = phone_crop.resize((scaled_w, scaled_h), Image.Resampling.LANCZOS)
+    # Scale phone height based on h_ratio to prevent border clipping
+    phone_h = int(canvas_h * h_ratio)
+    phone_w = int(phone_crop.width * (phone_h / phone_crop.height))
+    phone_resized = phone_crop.resize((phone_w, phone_h), Image.Resampling.LANCZOS)
     
-    # Paste on the right side of the canvas
-    # Using 78% of the scaled width for the phone frame crop
-    crop_w = int(scaled_w * 0.78)
-    crop_x = scaled_w - crop_w
-    phone_final = phone_resized.crop((crop_x, 0, scaled_w, scaled_h))
+    crop_w = phone_w
     
     # Create horizontal gradient mask to blend left edge of phone crop
-    mask = Image.new("L", (crop_w, scaled_h), 255)
+    mask = Image.new("L", (crop_w, phone_h), 255)
     mask_draw = ImageDraw.Draw(mask)
-    blend_x = int(crop_w * 0.2)
+    blend_x = int(crop_w * 0.18)
     for x in range(blend_x):
         alpha = int(255 * (x / float(blend_x)))
-        mask_draw.line([(x, 0), (x, scaled_h)], fill=alpha)
+        mask_draw.line([(x, 0), (x, phone_h)], fill=alpha)
         
-    paste_x = canvas_w - crop_w
-    canvas.paste(phone_final, (paste_x, 0), mask)
+    # Paste centered vertically and inset from the right edge
+    paste_x = canvas_w - crop_w - right_margin
+    paste_y = (canvas_h - phone_h) // 2
+    canvas.paste(phone_resized, (paste_x, paste_y), mask)
     
     # 3. Draw text on the left side
     draw = ImageDraw.Draw(canvas)
