@@ -509,8 +509,30 @@ class SpeechManager: NSObject, ObservableObject {
         }
         
         // 2. 要約部分の追加
-        let summary = article.aiSummary ?? article.description ?? ""
-        let sentences = SpeechManager.splitIntoSentences(summary)
+        let sentences: [String]
+        if let digest = article.summaryDigest {
+            var formattedSentences: [String] = []
+            formattedSentences.append(digest.headline)
+            for (index, point) in digest.points.enumerated() {
+                var pointText = ""
+                if !point.label.isEmpty {
+                    pointText += "ポイント\(index + 1)、\(point.label)。"
+                }
+                if !point.detail.isEmpty {
+                    pointText += point.detail
+                }
+                if !pointText.isEmpty {
+                    formattedSentences.append(pointText)
+                }
+            }
+            if !digest.actionTip.isEmpty {
+                formattedSentences.append("今日からできるアクション。\(digest.actionTip)")
+            }
+            sentences = formattedSentences
+        } else {
+            let summary = article.aiSummary ?? article.description ?? ""
+            sentences = SpeechManager.splitIntoSentences(summary)
+        }
         
         // 指定されたインデックス以降の文のみを連結
         let startIndex = isTitle ? 0 : max(0, sentenceIndex)

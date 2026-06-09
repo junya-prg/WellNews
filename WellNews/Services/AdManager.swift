@@ -73,11 +73,6 @@ final class AdManager {
             await MobileAds.shared.start()
             self.isInitialized = true
             logger.info("✅ AdMob初期化完了")
-            
-            // テスト用・ATT/UMPシミュレーション用
-            // ATTとUMPがまだ対応されていない場合でも、デバッグをスムーズにするために初期状態で有効化しておく
-            self.attResolved = true
-            self.consentResolved = true
         }
     }
 
@@ -105,5 +100,5 @@ struct AdConfiguration {
     static let showBannerInBookmarks = true
     
     /// ネイティブ広告を表示する間隔（記事数）
-    static let nativeAdInterval = 5
+    static let nativeAdInterval = 4
 }

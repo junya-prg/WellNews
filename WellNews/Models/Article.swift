@@ -15,6 +15,26 @@ struct TrackedKeyword: Codable, Hashable, Identifiable {
     var isEnabled: Bool
 }
 
+/// AI要約の構造化データ
+struct ArticleDigest: Codable, Hashable {
+    /// ひとことで言うと
+    var headline: String
+    /// 3つのポイント
+    var points: [DigestPoint]
+    /// 今日からできるアクション
+    var actionTip: String
+    /// 関連キーワード
+    var keywords: [String]
+}
+
+/// 要約の1ポイント
+struct DigestPoint: Codable, Hashable {
+    /// 短い見出し
+    var label: String
+    /// 見出しを説明する前向きな1文
+    var detail: String
+}
+
 /// 健康ニュースのカテゴリ
 enum ArticleCategory: String, CaseIterable, Codable, Identifiable {
     case exercise = "運動"
@@ -189,6 +209,9 @@ struct Article: Identifiable, Codable, Hashable {
     /// AI生成の要約
     var aiSummary: String?
     
+    /// AI生成の構造化要約
+    var summaryDigest: ArticleDigest?
+    
     /// AIが判定したカテゴリ
     var category: ArticleCategory?
     
@@ -216,6 +239,7 @@ struct Article: Identifiable, Codable, Hashable {
         url: URL,
         description: String? = nil,
         aiSummary: String? = nil,
+        summaryDigest: ArticleDigest? = nil,
         category: ArticleCategory? = nil,
         relevanceScore: Double? = nil,
         isAIProcessed: Bool = false,
@@ -228,6 +252,7 @@ struct Article: Identifiable, Codable, Hashable {
         self.url = url
         self.description = description
         self.aiSummary = aiSummary
+        self.summaryDigest = summaryDigest
         self.category = category
         self.relevanceScore = relevanceScore
         self.isAIProcessed = isAIProcessed
@@ -289,6 +314,16 @@ extension Article {
             url: URL(string: "https://example.com/article1")!,
             description: "最新の睡眠科学に基づき、深い睡眠を得るための具体的な寝室環境の整え方や、カフェイン制限の時間、スマホ使用制限などの具体的なアクションを解説。",
             aiSummary: "質の高い睡眠をとるためには、就寝前の行動が不可欠です。本記事ではスマホの光カット、室温の調整、ハーブティーの導入など、科学的に実証された5つの方法を紹介します。",
+            summaryDigest: ArticleDigest(
+                headline: "就寝前の習慣を見直すことで、睡眠の質は劇的に改善できます。",
+                points: [
+                    DigestPoint(label: "睡眠環境の調整", detail: "室温を快適に保ち、寝る1時間前から室内の照明を暗くしましょう。"),
+                    DigestPoint(label: "カフェイン制限", detail: "夕方以降のカフェイン摂取を避けることで、入眠がスムーズになります。"),
+                    DigestPoint(label: "スマホ制限", detail: "就寝30分前のブルーライト遮断は、メラトニンの分泌を促します。")
+                ],
+                actionTip: "今夜は布団に入る30分前にスマホの電源を切ってみましょう。",
+                keywords: ["睡眠の質", "ナイトルーティン", "ブルーライト", "メラトニン"]
+            ),
             category: .sleep,
             relevanceScore: 0.92,
             isAIProcessed: true,

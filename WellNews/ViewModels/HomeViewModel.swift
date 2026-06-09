@@ -187,12 +187,7 @@ class HomeViewModel: ObservableObject {
         
         isProcessingAI = true
         let profile = getUserHealthProfile()
-        var updatedArticle = article
-        
-        updatedArticle.aiSummary = await aiService.summarize(article: article)
-        updatedArticle.category = await aiService.categorize(article: article)
-        updatedArticle.relevanceScore = await aiService.calculateRelevance(article: article, userProfile: profile)
-        updatedArticle.isAIProcessed = true
+        let updatedArticle = await aiService.processOneArticle(article, userProfile: profile)
         
         articles[index] = updatedArticle
         isProcessingAI = false

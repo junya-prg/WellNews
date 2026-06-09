@@ -12,6 +12,39 @@ import Combine
 import FoundationModels
 #endif
 
+// MARK: - 構造化要約の生成専用 DTO
+
+#if canImport(FoundationModels)
+/// Foundation Models に型付きで生成させる構造化要約 DTO
+/// 永続化・表示用の `ArticleDigest` とは分離し、生成後に変換する。
+@available(iOS 26.0, macOS 26.0, *)
+@Generable
+struct GeneratedDigest {
+    @Guide(description: "記事のいちばん大事な学びや健康上のメリットを、生活に取り入れやすいやさしい1文に")
+    var headline: String
+
+    @Guide(description: "運動・食事・睡眠・メンタルケアの観点での健康上の要点", .count(3))
+    var points: [GeneratedPoint]
+
+    @Guide(description: "今日から実践できる、前向きで具体的な健康アクションプラン")
+    var actionTip: String
+
+    @Guide(description: "記事に関係する短いキーワード", .maximumCount(4))
+    var keywords: [String]
+}
+
+/// 構造化要約の1ポイント（生成専用）
+@available(iOS 26.0, macOS 26.0, *)
+@Generable
+struct GeneratedPoint {
+    @Guide(description: "5〜10文字程度の短い見出し（例: 睡眠環境、有酸素運動、糖質オフ）")
+    var label: String
+
+    @Guide(description: "見出しを説明する、不安を煽らない具体的で前向きな1文")
+    var detail: String
+}
+#endif
+
 /// ユーザーの健康プロフィール（おすすめ度計算用）
 struct UserHealthProfile {
     /// 関心のあるカテゴリ
@@ -171,6 +204,88 @@ class FoundationModelsService: ObservableObject {
         return article.description ?? String(localized: "要約を生成できません")
         #endif
     }
+    
+    // MARK: - 構造化要約生成
+
+    /// 記事を構造化要約（ひとこと要約＋3ポイント＋アクション＋キーワード）に変換
+    /// - Parameter article: 要約対象の記事
+    /// - Returns: 構造化要約。生成できない場合は nil。
+    func generateDigest(article: Article) async -> ArticleDigest? {
+        guard #available(iOS 26.0, macOS 26.0, *) else {
+            return nil
+        }
+        guard _isAvailableCache == true else {
+            return nil
+        }
+
+        let content = article.description ?? article.title
+
+        let instructions = """
+            あなたは健康やウェルネスに関するニュース記事の要約を作成するアシスタントです。
+            このアプリはユーザーの健康増進やウェルネス習慣をサポートすることを目的としています。
+            記事を、ユーザーが直感的に読めて実践しやすい「構造化された要約」に整理してください。
+            以下のルールに必ず従ってください：
+            - すべて日本語で書く
+            - 健康上のメリットや具体的な改善アクションを最優先で抽出
+            - ユーザーにとってポジティブで前向きな表現を使う（不安や恐怖を煽る表現は避ける）
+            - 客観的で信頼できる情報のみを含め、元記事に書かれていない事実は付け足さない
+            - headline は記事の最も大事な健康メリットや学びを簡潔に表す1文
+            - points は記事の要点を3つ。label は短い見出し（5〜10文字）、detail はやさしい説明1文
+            - actionTip は日常生活で今日からすぐに実践できる前向きな健康アクション1文
+            - keywords は記事に関係する短い語を最大4つ
+            """
+        let prompt = """
+            以下のニュース記事を、構造化要約に整理してください。
+
+            タイトル: \(article.title)
+            内容: \(content)
+            """
+
+        #if canImport(FoundationModels)
+        do {
+            let session = LanguageModelSession(instructions: instructions)
+            let generated = try await session.respond(
+                to: prompt,
+                generating: GeneratedDigest.self
+            ).content
+            return Self.convert(generated)
+        } catch {
+            print("🤖 構造化要約生成エラー: \(error)")
+            return nil
+        }
+        #else
+        return nil
+        #endif
+    }
+
+    #if canImport(FoundationModels)
+    /// 生成専用 DTO を永続化・表示用の素の型へ変換
+    @available(iOS 26.0, macOS 26.0, *)
+    private static func convert(_ generated: GeneratedDigest) -> ArticleDigest? {
+        let headline = generated.headline.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !headline.isEmpty else { return nil }
+
+        let points: [DigestPoint] = generated.points.compactMap { point in
+            let label = point.label.trimmingCharacters(in: .whitespacesAndNewlines)
+            let detail = point.detail.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !label.isEmpty || !detail.isEmpty else { return nil }
+            return DigestPoint(label: label, detail: detail)
+        }
+        guard !points.isEmpty else { return nil }
+
+        let actionTip = generated.actionTip.trimmingCharacters(in: .whitespacesAndNewlines)
+        let keywords = generated.keywords
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+
+        return ArticleDigest(
+            headline: headline,
+            points: points,
+            actionTip: actionTip,
+            keywords: keywords
+        )
+    }
+    #endif
     
     // MARK: - カテゴリ分類
     
@@ -366,11 +481,7 @@ class FoundationModelsService: ObservableObject {
         var processedArticles: [Article] = []
         for (index, article) in articles.enumerated() {
             print("🤖 記事 \(index + 1)/\(articles.count) を処理中...")
-            var processed = article
-            processed.category = await categorize(article: article)
-            processed.aiSummary = await summarize(article: article)
-            processed.relevanceScore = await calculateRelevance(article: article, userProfile: userProfile)
-            processed.isAIProcessed = true
+            let processed = await processOneArticle(article, userProfile: userProfile)
             processedArticles.append(processed)
         }
         
@@ -395,12 +506,22 @@ class FoundationModelsService: ObservableObject {
         
         var category: ArticleCategory = .other
         var aiSummary: String? = nil
+        var summaryDigest: ArticleDigest? = nil
         var relevanceScore: Double = 0.5
         var isProcessed = false
         
         if _isAvailableCache == true {
             category = await categorize(article: article)
-            aiSummary = await summarize(article: article)
+            
+            // 構造化要約を優先して生成する
+            if let digest = await generateDigest(article: article) {
+                summaryDigest = digest
+                aiSummary = digest.headline
+            } else {
+                // 失敗した場合は従来のプレーンテキスト要約にフォールバック
+                aiSummary = await summarize(article: article)
+            }
+            
             relevanceScore = await calculateRelevance(article: article, userProfile: userProfile)
             isProcessed = true
         } else {
@@ -418,6 +539,7 @@ class FoundationModelsService: ObservableObject {
             url: targetURL,
             description: article.description,
             aiSummary: aiSummary,
+            summaryDigest: summaryDigest,
             category: category,
             relevanceScore: relevanceScore,
             isAIProcessed: isProcessed,
