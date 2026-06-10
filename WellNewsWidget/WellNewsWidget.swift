@@ -71,21 +71,39 @@ struct WellNewsWidgetEntryView: View {
 // MARK: - Supporting Views
 
 struct ContainerBackgroundView: View {
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         ZStack {
-            // Deep dark premium background
-            Color(red: 0.05, green: 0.06, blue: 0.11)
-            
-            // Subtle glowing gradient for modern premium look
-            LinearGradient(
-                colors: [
-                    Color.cyan.opacity(0.10),
-                    Color.indigo.opacity(0.15),
-                    Color.clear
-                ],
-                startPoint: .topTrailing,
-                endPoint: .bottomLeading
-            )
+            if colorScheme == .dark {
+                // Deep dark premium background
+                Color(red: 0.05, green: 0.06, blue: 0.11)
+                
+                // Subtle glowing gradient for modern premium look
+                LinearGradient(
+                    colors: [
+                        Color.cyan.opacity(0.10),
+                        Color.indigo.opacity(0.15),
+                        Color.clear
+                    ],
+                    startPoint: .topTrailing,
+                    endPoint: .bottomLeading
+                )
+            } else {
+                // Fresh light premium background (matches light app icon)
+                Color(red: 0.94, green: 0.97, blue: 0.95)
+                
+                // Soft minty gradient for light mode
+                LinearGradient(
+                    colors: [
+                        Color.green.opacity(0.08),
+                        Color.cyan.opacity(0.05),
+                        Color.clear
+                    ],
+                    startPoint: .topTrailing,
+                    endPoint: .bottomLeading
+                )
+            }
         }
     }
 }
@@ -106,7 +124,7 @@ struct SmallWidgetView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 3.5, style: .continuous))
                     Text("WellNews")
                         .font(.system(size: 11, weight: .bold))
-                        .foregroundColor(.white.opacity(0.9))
+                        .foregroundColor(.primary.opacity(0.9))
                     Spacer()
                 }
                 
@@ -128,7 +146,7 @@ struct SmallWidgetView: View {
                 // Article Title
                 Text(article.title)
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                     .lineLimit(3)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -176,10 +194,10 @@ struct MediumWidgetView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
                 Text("WellNews")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 Text("健康ピックアップ")
                     .font(.system(size: 9))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
                 Spacer()
             }
             .padding(.bottom, 2)
@@ -219,10 +237,10 @@ struct LargeWidgetView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("WellNews")
                         .font(.system(size: 13, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     Text("本日の健康おすすめトピック")
                         .font(.system(size: 9))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
                 Spacer()
             }
@@ -250,6 +268,7 @@ struct LargeWidgetView: View {
 /// Extra Large Widget Layout: Split dashboard layout displaying one large featured article and a list of 4 articles.
 struct ExtraLargeWidgetView: View {
     let articles: [Article]
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack(spacing: 16) {
@@ -312,7 +331,7 @@ struct ExtraLargeWidgetView: View {
                         
                         Text(featured.title)
                             .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                             .lineLimit(3)
                             .multilineTextAlignment(.leading)
                         
@@ -320,7 +339,7 @@ struct ExtraLargeWidgetView: View {
                         if let summary = displaySummary {
                             Text(summary)
                                 .font(.system(size: 11))
-                                .foregroundColor(.white.opacity(0.6))
+                                .foregroundColor(.secondary)
                                 .lineLimit(4)
                                 .multilineTextAlignment(.leading)
                         }
@@ -339,11 +358,11 @@ struct ExtraLargeWidgetView: View {
                     }
                     .padding(14)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .background(Color.white.opacity(0.04))
+                    .background(colorScheme == .dark ? Color.white.opacity(0.04) : Color.black.opacity(0.03))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.white.opacity(0.05), lineWidth: 0.5)
+                            .stroke(colorScheme == .dark ? Color.white.opacity(0.05) : Color.black.opacity(0.05), lineWidth: 0.5)
                     )
                 }
             } else {
@@ -358,7 +377,7 @@ struct ExtraLargeWidgetView: View {
                         .foregroundColor(.cyan)
                     Text("最新健康トピックス")
                         .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 }
                 .padding(.bottom, 4)
                 
@@ -387,6 +406,7 @@ struct ExtraLargeWidgetView: View {
 struct ArticleRowView: View {
     let article: Article
     let compact: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         Link(destination: URL(string: "wellnews://article?id=\(article.id.uuidString)")!) {
@@ -406,21 +426,21 @@ struct ArticleRowView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(article.title)
                         .font(.system(size: compact ? 12 : 13, weight: .semibold))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                         .lineLimit(compact ? 1 : 2)
                         .multilineTextAlignment(.leading)
                     
                     HStack(spacing: 6) {
                         Text(article.source)
                             .font(.system(size: 9))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                             .lineLimit(1)
                         Text("•")
                             .font(.system(size: 9))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Text(article.relativeDate)
                             .font(.system(size: 9))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                 }
                 
@@ -449,11 +469,11 @@ struct ArticleRowView: View {
             .padding(.vertical, 6)
             .padding(.horizontal, 8)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white.opacity(0.05))
+            .background(colorScheme == .dark ? Color.white.opacity(0.05) : Color.black.opacity(0.03))
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.white.opacity(0.04), lineWidth: 0.5)
+                    .stroke(colorScheme == .dark ? Color.white.opacity(0.04) : Color.black.opacity(0.05), lineWidth: 0.5)
             )
         }
     }
