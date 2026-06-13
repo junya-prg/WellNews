@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0532339522E6658C8C098616 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C55B35ADC17792B7124E7FCF /* Localizable.xcstrings */; };
 		087B5D76C3337CEFE52A857B /* WidgetAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */; };
 		9C3DA9710F45B6C950B6DD8B /* WellNewsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */; };
 		AF17BD3AB24DCF28B0BDB262 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC50713CB7ACBF262FECF730 /* Article.swift */; };
@@ -44,12 +45,16 @@
 		142A639B2FCF7308002D501F /* WellNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WellNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		199DC3290553756C98389A2A /* WellNewsWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WellNewsWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CAC9FDB3C3F01AB33F7E935 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DC5988A283FE65F22122B2E /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
 		4426A4954A5877712E151783 /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
 		5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
 		5DA5D1A419BD1D853BE39594 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		60FFE37B4E1333EEA09E49C6 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
 		636554FE156D568DE82AFDE8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AE9CE50E078374D7CAD384F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C55B35ADC17792B7124E7FCF /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C97F41BB91708097EEB4906F /* WidgetAssets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = WidgetAssets.xcassets; sourceTree = "<group>"; };
+		D28313B7D684296EA825E673 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
 		DC50713CB7ACBF262FECF730 /* Article.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Article.swift; path = WellNews/Models/Article.swift; sourceTree = "<group>"; };
 		EF99F7060F4859808E026494 /* WellNewsWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WellNewsWidget.swift; sourceTree = "<group>"; };
 		FD7E2FF3C5E74E56D252BA9C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				5075FBD8AF69F47B253777B6 /* WellNewsWidget.swift */,
+				C55B35ADC17792B7124E7FCF /* Localizable.xcstrings */,
 			);
 			path = WellNewsWidget;
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 				097A289E3489D8F77808AF1D /* WellNewsWidget */,
 				79F41D895BAB13026D075FC8 /* WellNewsWidget */,
 				88E8592EC9C701268F6F7572 /* WellNewsWidget */,
+				B97BA352A8A9002716923CFD /* WellNewsWidget */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +169,16 @@
 				D0A818FD4245134191C7D83C /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B97BA352A8A9002716923CFD /* WellNewsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D28313B7D684296EA825E673 /* WellNewsWidget.swift */,
+				9AE9CE50E078374D7CAD384F /* Info.plist */,
+				3DC5988A283FE65F22122B2E /* WidgetAssets.xcassets */,
+			);
+			path = WellNewsWidget;
 			sourceTree = "<group>";
 		};
 		D0A818FD4245134191C7D83C /* iOS */ = {
@@ -238,6 +255,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 142A63922FCF7308002D501F;
 			minimizedProjectReferenceProxies = 1;
@@ -268,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				087B5D76C3337CEFE52A857B /* WidgetAssets.xcassets in Resources */,
+				0532339522E6658C8C098616 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +477,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WellNews/WellNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2595AXVHS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -474,7 +493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.junya.WellNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -494,7 +513,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WellNews/WellNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2595AXVHS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -510,7 +529,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.junya.WellNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

@@ -1,0 +1,125 @@
+{
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "%@%%" : {
+
+    },
+    "•" : {
+
+    },
+    "WellNews" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WellNews"
+          }
+        }
+      }
+    },
+    "おすすめ度 %@%%" : {
+
+    },
+    "おすすめ度 %lld%%" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevance %lld%%"
+          }
+        }
+      }
+    },
+    "ニュースがありません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No news available"
+          }
+        }
+      }
+    },
+    "他の記事はありません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No other articles"
+          }
+        }
+      }
+    },
+    "健康" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health"
+          }
+        }
+      }
+    },
+    "健康ピックアップ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Pick"
+          }
+        }
+      }
+    },
+    "最新の健康ニュースとお勧め度をホーム画面で確認。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the latest health news and relevance scores on your home screen."
+          }
+        }
+      }
+    },
+    "最新健康トピックス" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest Health Topics"
+          }
+        }
+      }
+    },
+    "本日の健康おすすめトピック" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today's Health Recommendations"
+          }
+        }
+      }
+    },
+    "注目記事" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Featured Article"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

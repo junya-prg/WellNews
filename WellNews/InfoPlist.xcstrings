@@ -1,0 +1,41 @@
+{
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "WellNews"
+          }
+        }
+      }
+    },
+    "NSUserTrackingUsageDescription" : {
+      "comment" : "Privacy - Tracking Usage Description",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "表示される広告をパーソナライズし、より関連性の高い情報を提供するために利用します。"
+          }
+        }
+      }
+    },
+    "表示される広告をパーソナライズし、より関連性の高い情報を提供するために利用します。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We use this to personalize the ads you see and provide more relevant health recommendations."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

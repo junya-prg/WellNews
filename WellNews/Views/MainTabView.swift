@@ -59,6 +59,11 @@ struct MainTabView: View {
         }
     }
     
+    private var isEnglishUI: Bool {
+        let lang = Bundle.main.preferredLocalizations.first ?? "en"
+        return lang.hasPrefix("en")
+    }
+
     private func handleDeepLink(_ url: URL) {
         guard url.scheme == "wellnews" else { return }
         
@@ -74,7 +79,7 @@ struct MainTabView: View {
         if let article = loadedArticles.first(where: { $0.id == uuid }) {
             self.selectedArticleForDetail = article
         } else {
-            let cacheKey = "cachedArticles_ja"
+            let cacheKey = isEnglishUI ? "cachedArticles_en" : "cachedArticles_ja"
             let suiteName = "group.jp.junya.WellNews"
             if let sharedDefaults = UserDefaults(suiteName: suiteName),
                let data = sharedDefaults.data(forKey: cacheKey),

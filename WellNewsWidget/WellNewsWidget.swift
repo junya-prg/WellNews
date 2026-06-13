@@ -22,8 +22,13 @@ struct Provider: TimelineProvider {
         completion(timeline)
     }
     
+    private var isEnglishUI: Bool {
+        let lang = Bundle.main.preferredLocalizations.first ?? "en"
+        return lang.hasPrefix("en")
+    }
+
     private func loadArticles() -> [Article] {
-        let cacheKey = "cachedArticles_ja"
+        let cacheKey = isEnglishUI ? "cachedArticles_en" : "cachedArticles_ja"
         let suiteName = "group.jp.junya.WellNews"
         if let sharedDefaults = UserDefaults(suiteName: suiteName),
            let data = sharedDefaults.data(forKey: cacheKey),
@@ -134,7 +139,7 @@ struct SmallWidgetView: View {
                 HStack(spacing: 3) {
                     Image(systemName: categoryIconName(for: article.category))
                         .font(.system(size: 8))
-                    Text(article.category?.displayName ?? "健康")
+                    Text(article.category?.displayName ?? String(localized: "健康"))
                         .font(.system(size: 8, weight: .bold))
                 }
                 .padding(.horizontal, 6)

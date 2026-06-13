@@ -254,9 +254,9 @@ struct EmptyArticlesView: View {
     
     var body: some View {
         ContentUnavailableView(
-            hasFilter ? "該当する健康記事がありません" : "健康記事がありません",
+            hasFilter ? String(localized: "該当する健康記事がありません") : String(localized: "健康記事がありません"),
             systemImage: "newspaper",
-            description: Text(hasFilter ? "他のカテゴリを選択してください" : "設定画面でキーワードを追加するか、引っ張って更新してください")
+            description: Text(hasFilter ? String(localized: "他のカテゴリを選択してください") : String(localized: "設定画面でキーワードを追加するか、引っ張って更新してください"))
         )
     }
 }

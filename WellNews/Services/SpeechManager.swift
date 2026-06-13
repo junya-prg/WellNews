@@ -61,8 +61,16 @@ class SpeechManager: NSObject, ObservableObject {
     /// ブリーフィング（連続再生）モードかどうか
     @Published private(set) var isBriefingMode = false
     
-    /// 音声の言語（日本語固定）
-    private let speechLanguage = "ja-JP"
+    /// 現在のUI言語が英語かどうか
+    private var isEnglishUI: Bool {
+        let lang = Bundle.main.preferredLocalizations.first ?? "en"
+        return lang.hasPrefix("en")
+    }
+    
+    /// 音声の言語
+    private var speechLanguage: String {
+        return isEnglishUI ? "en-US" : "ja-JP"
+    }
     
     /// 再生速度の保存キー
     private let speedKey = "wellnews.speechSpeed"
@@ -80,6 +88,9 @@ class SpeechManager: NSObject, ObservableObject {
     
     /// キャンセル・停止用のフラグ（デリゲート処理中の競合回避）
     private var isStoppingExplicitly = false
+    
+    /// 現在アクティブな発話オブジェクト（非同期デリゲートの競合防止用）
+    private var activeUtterance: AVSpeechUtterance?
     
     override init() {
         super.init()
@@ -341,7 +352,17 @@ class SpeechManager: NSObject, ObservableObject {
             return
         }
         
-        let article = queue[queueIndex]
+        var article = queue[queueIndex]
+        
+        // AI要約完了前に再生を開始した場合に備え、最新の記事データを取得して差し替える
+        if !article.isAIProcessed {
+            if let latestArticle = ArticleFetchService.shared.articles.first(where: { $0.id == article.id }),
+               latestArticle.isAIProcessed {
+                article = latestArticle
+                queue[queueIndex] = latestArticle
+            }
+        }
+        
         currentArticle = article
         
         speakFrom(sentenceIndex: -1, isTitle: true)
@@ -357,7 +378,7 @@ class SpeechManager: NSObject, ObservableObject {
         
         // 終わりの挨拶を単一発話として再生
         sentenceOffsets = []
-        let closeText = "今日のウェルネスニュースは以上です。健康的な一日をお過ごしください。"
+        let closeText = isEnglishUI ? "That's all for today's wellness news. Have a healthy day." : "今日のウェルネスニュースは以上です。健康的な一日をお過ごしください。"
         let range = NSRange(location: 0, length: closeText.utf16.count)
         sentenceOffsets.append(SpokenSentenceOffset(text: closeText, range: range, isTitle: false, sentenceIndex: 0))
         fullSpokenText = closeText
@@ -395,6 +416,7 @@ class SpeechManager: NSObject, ObservableObject {
     private func stopPlaybackInternal() {
         isStoppingExplicitly = true
         synthesizer.stopSpeaking(at: .immediate)
+        activeUtterance = nil
         silentAudioPlayer?.stop()
         isPlaying = false
         isPaused = false
@@ -499,8 +521,8 @@ class SpeechManager: NSObject, ObservableObject {
         
         // 1. タイトル部分の追加（タイトルから再生する場合のみ）
         if isTitle {
-            let prefix = isBriefingMode ? "第\(queueIndex + 1)位。" : ""
-            let titleText = prefix + article.title + "。"
+            let prefix = isBriefingMode ? (isEnglishUI ? "Number \(queueIndex + 1). " : "第\(queueIndex + 1)位。") : ""
+            let titleText = prefix + article.title + (isEnglishUI ? ". " : "。")
             let range = NSRange(location: 0, length: titleText.utf16.count)
             sentenceOffsets.append(SpokenSentenceOffset(text: titleText, range: range, isTitle: true, sentenceIndex: -1))
             text += titleText
@@ -516,7 +538,7 @@ class SpeechManager: NSObject, ObservableObject {
             for (index, point) in digest.points.enumerated() {
                 var pointText = ""
                 if !point.label.isEmpty {
-                    pointText += "ポイント\(index + 1)、\(point.label)。"
+                    pointText += isEnglishUI ? "Point \(index + 1). \(point.label). " : "ポイント\(index + 1)、\(point.label)。"
                 }
                 if !point.detail.isEmpty {
                     pointText += point.detail
@@ -526,7 +548,7 @@ class SpeechManager: NSObject, ObservableObject {
                 }
             }
             if !digest.actionTip.isEmpty {
-                formattedSentences.append("今日からできるアクション。\(digest.actionTip)")
+                formattedSentences.append(isEnglishUI ? "Action you can take starting today: \(digest.actionTip)" : "今日からできるアクション。\(digest.actionTip)")
             }
             sentences = formattedSentences
         } else {
@@ -564,6 +586,7 @@ class SpeechManager: NSObject, ObservableObject {
         
         let utterance = AVSpeechUtterance(string: fullSpokenText)
         utterance.voice = selectVoice()
+        activeUtterance = utterance
         
         // 再生速度
         let rate = AVSpeechUtteranceDefaultSpeechRate * speechSpeed
@@ -608,14 +631,32 @@ class SpeechManager: NSObject, ObservableObject {
         }
     }
     
-    /// 日本語テキストを句読点・改行で文に分割する（句読点を含める）
+    /// テキストを句読点・改行で文に分割する（句読点を含める）
     static func splitIntoSentences(_ text: String) -> [String] {
         var sentences: [String] = []
         var current = ""
+        let chars = Array(text)
         
-        for char in text {
+        for i in 0..<chars.count {
+            let char = chars[i]
             current.append(char)
-            if char == "。" || char == "！" || char == "？" || char == "\n" {
+            
+            var shouldSplit = false
+            if char == "。" || char == "！" || char == "？" || char == "\n" || char == "!" || char == "?" {
+                shouldSplit = true
+            } else if char == "." {
+                // Prevent splitting decimals (e.g. 1.2) by checking if the next character is a digit
+                if i + 1 < chars.count {
+                    let nextChar = chars[i + 1]
+                    if !nextChar.isNumber {
+                        shouldSplit = true
+                    }
+                } else {
+                    shouldSplit = true
+                }
+            }
+            
+            if shouldSplit {
                 let trimmed = current.trimmingCharacters(in: .whitespacesAndNewlines)
                 if !trimmed.isEmpty {
                     sentences.append(trimmed)
@@ -637,10 +678,12 @@ class SpeechManager: NSObject, ObservableObject {
 
 extension SpeechManager: @preconcurrency AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        guard utterance == activeUtterance else { return }
         // 再生が開始された
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        guard utterance == activeUtterance else { return }
         guard !isStoppingExplicitly else { return }
         handlePlaybackFinished()
     }
@@ -650,6 +693,7 @@ extension SpeechManager: @preconcurrency AVSpeechSynthesizerDelegate {
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        guard utterance == activeUtterance else { return }
         // 音声が読んでいる現在の文字位置から、対応する文/タイトルを特定してインデックスを更新する
         let location = characterRange.location
         if let match = sentenceOffsets.first(where: { location >= $0.range.location && location < ($0.range.location + $0.range.length) }) {

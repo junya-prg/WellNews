@@ -37,7 +37,7 @@ struct GeneratedDigest {
 @available(iOS 26.0, macOS 26.0, *)
 @Generable
 struct GeneratedPoint {
-    @Guide(description: "5〜10文字程度の短い見出し（例: 睡眠環境、有酸素運動、糖質オフ）")
+    @Guide(description: "短い見出し。日本語は5〜10文字程度、英語は2〜4単語程度（例: 睡眠環境、Sleep Habits）")
     var label: String
 
     @Guide(description: "見出しを説明する、不安を煽らない具体的で前向きな1文")
@@ -93,9 +93,10 @@ class FoundationModelsService: ObservableObject {
     /// isAvailableのキャッシュ
     private var _isAvailableCache: Bool?
 
-    /// 現在のUI言語が英語かどうか（将来の多言語化用。現在は日本語に固定）
+    /// 現在のUI言語が英語かどうか
     private var isEnglishUI: Bool {
-        return false
+        let lang = Bundle.main.preferredLocalizations.first ?? "en"
+        return lang.hasPrefix("en")
     }
     
     /// 利用可能判定
@@ -220,26 +221,51 @@ class FoundationModelsService: ObservableObject {
 
         let content = article.description ?? article.title
 
-        let instructions = """
-            あなたは健康やウェルネスに関するニュース記事の要約を作成するアシスタントです。
-            このアプリはユーザーの健康増進やウェルネス習慣をサポートすることを目的としています。
-            記事を、ユーザーが直感的に読めて実践しやすい「構造化された要約」に整理してください。
-            以下のルールに必ず従ってください：
-            - すべて日本語で書く
-            - 健康上のメリットや具体的な改善アクションを最優先で抽出
-            - ユーザーにとってポジティブで前向きな表現を使う（不安や恐怖を煽る表現は避ける）
-            - 客観的で信頼できる情報のみを含め、元記事に書かれていない事実は付け足さない
-            - headline は記事の最も大事な健康メリットや学びを簡潔に表す1文
-            - points は記事の要点を3つ。label は短い見出し（5〜10文字）、detail はやさしい説明1文
-            - actionTip は日常生活で今日からすぐに実践できる前向きな健康アクション1文
-            - keywords は記事に関係する短い語を最大4つ
-            """
-        let prompt = """
-            以下のニュース記事を、構造化要約に整理してください。
+        let instructions: String
+        let prompt: String
+        if isEnglishUI {
+            instructions = """
+                You are an assistant that creates structured summaries of health and wellness news articles.
+                This app supports people tracking wellness and health habits.
+                Organize the article into a structured summary that users can intuitively read and apply.
+                Follow these rules:
+                - Write everything in English
+                - Prioritize health benefits and concrete improvement actions
+                - Use positive, encouraging language (avoid panic-inducing expressions)
+                - Include only objective, reliable information. Do not add facts not in the source article.
+                - headline is 1 gentle sentence summarizing the most important health benefit/learning of the article.
+                - points consists of exactly 3 key points. label is a short heading (2-4 words, e.g., 'Sleep Habits', 'Daily Exercise', 'Diet Tips'), detail is 1 gentle sentence explaining it.
+                - actionTip is 1 positive, concrete health action sentence that the user can practice starting today.
+                - keywords are up to 4 short words/phrases related to the article.
+                """
+            prompt = """
+                Please organize the following news article into a structured summary.
 
-            タイトル: \(article.title)
-            内容: \(content)
-            """
+                Title: \(article.title)
+                Content: \(content)
+                """
+        } else {
+            instructions = """
+                あなたは健康やウェルネスに関するニュース記事の要約を作成するアシスタントです。
+                このアプリはユーザーの健康増進やウェルネス習慣をサポートすることを目的としています。
+                記事を、ユーザーが直感的に読めて実践しやすい「構造化された要約」に整理してください。
+                以下のルールに必ず従ってください：
+                - すべて日本語で書く
+                - 健康上のメリットや具体的な改善アクションを最優先で抽出
+                - ユーザーにとってポジティブで前向きな表現を使う（不安や恐怖を煽る表現は避ける）
+                - 客観的で信頼できる情報のみを含め、元記事に書かれていない事実は付け足さない
+                - headline は記事の最も大事な健康メリットや学びを簡潔に表す1文
+                - points は記事の要点を3つ。label は短い見出し（5〜10文字）、detail はやさしい説明1文
+                - actionTip は日常生活で今日からすぐに実践できる前向きな健康アクション1文
+                - keywords は記事に関係する短い語を最大4つ
+                """
+            prompt = """
+                以下のニュース記事を、構造化要約に整理してください。
+
+                タイトル: \(article.title)
+                内容: \(content)
+                """
+        }
 
         #if canImport(FoundationModels)
         do {
@@ -662,10 +688,13 @@ class FoundationModelsService: ObservableObject {
         }
         
         var urlComponents = URLComponents(string: "https://news.google.com/articles/\(artId)")
+        let hl = isEnglishUI ? "en-US" : "ja"
+        let gl = isEnglishUI ? "US" : "JP"
+        let ceid = isEnglishUI ? "US:en" : "JP:ja"
         urlComponents?.queryItems = [
-            URLQueryItem(name: "hl", value: "ja"),
-            URLQueryItem(name: "gl", value: "JP"),
-            URLQueryItem(name: "ceid", value: "JP:ja")
+            URLQueryItem(name: "hl", value: hl),
+            URLQueryItem(name: "gl", value: gl),
+            URLQueryItem(name: "ceid", value: ceid)
         ]
         
         guard let fetchURL = urlComponents?.url else { return nil }

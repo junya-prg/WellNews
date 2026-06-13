@@ -35,39 +35,57 @@ class ArticleFetchService: ObservableObject {
     private let googleNewsRSSBaseURL = "https://news.google.com/rss/search"
     
     /// UserDefaultsキー (TrackedKeyword構造体用にv3に更新)
-    private let keywordsKey = "wellnews.trackedKeywords_v3"
+    private var keywordsKey: String {
+        return isEnglishUI ? "wellnews.trackedKeywords_v3_en" : "wellnews.trackedKeywords_v3"
+    }
     
     /// UserDefaultsキー (RSS配信元の保存用)
     private let rssSourcesKey = "wellnews.activeRSSSources_v1"
     
-    /// 現在のUI言語が英語かどうか（将来の多言語化用。現在は日本語に固定）
+    /// 現在のUI言語が英語かどうか
     private var isEnglishUI: Bool {
-        return false
+        let lang = Bundle.main.preferredLocalizations.first ?? "en"
+        return lang.hasPrefix("en")
     }
 
-    /// デフォルトのキーワード（日本語固定）
+    /// デフォルトのキーワード
     private var defaultKeywords: [TrackedKeyword] {
-        return [
-            TrackedKeyword(name: "睡眠改善", isEnabled: true),
-            TrackedKeyword(name: "糖質制限", isEnabled: true),
-            TrackedKeyword(name: "筋トレ", isEnabled: true),
-            TrackedKeyword(name: "サウナ健康", isEnabled: true),
-            TrackedKeyword(name: "メンタルケア", isEnabled: true),
-            TrackedKeyword(name: "マインドフルネス", isEnabled: true)
-        ]
+        if isEnglishUI {
+            return [
+                TrackedKeyword(name: "Sleep Improvement", isEnabled: true),
+                TrackedKeyword(name: "Low Carb Diet", isEnabled: true),
+                TrackedKeyword(name: "Strength Training", isEnabled: true),
+                TrackedKeyword(name: "Sauna Health", isEnabled: true),
+                TrackedKeyword(name: "Mental Care", isEnabled: true),
+                TrackedKeyword(name: "Mindfulness", isEnabled: true)
+            ]
+        } else {
+            return [
+                TrackedKeyword(name: "睡眠改善", isEnabled: true),
+                TrackedKeyword(name: "糖質制限", isEnabled: true),
+                TrackedKeyword(name: "筋トレ", isEnabled: true),
+                TrackedKeyword(name: "サウナ健康", isEnabled: true),
+                TrackedKeyword(name: "メンタルケア", isEnabled: true),
+                TrackedKeyword(name: "マインドフルネス", isEnabled: true)
+            ]
+        }
     }
 
     /// UI言語に応じた Google News RSS のクエリパラメータ
     private var newsRegionParams: String {
-        return "hl=ja&gl=JP&ceid=JP:ja"
+        if isEnglishUI {
+            return "hl=en-US&gl=US&ceid=US:en"
+        } else {
+            return "hl=ja&gl=JP&ceid=JP:ja"
+        }
     }
 
     /// キャッシュ用のUserDefaultsキー
     private var cacheKey: String {
-        "cachedArticles_ja"
+        return isEnglishUI ? "cachedArticles_en" : "cachedArticles_ja"
     }
     private var cacheTimestampKey: String {
-        "cachedArticlesTimestamp_ja"
+        return isEnglishUI ? "cachedArticlesTimestamp_en" : "cachedArticlesTimestamp_ja"
     }
     
     /// キャッシュの有効期限（1時間）
@@ -242,7 +260,7 @@ class ArticleFetchService: ObservableObject {
         }
         
         // 3. note (キーワードごとに個別のRSSが存在するため、上位5キーワード分を追加)
-        if activeRSSSources.contains(.note) {
+        if activeRSSSources.contains(.note) && !isEnglishUI {
             for keyword in activeKeywords.prefix(5) {
                 if let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                    let url = URL(string: "https://note.com/hashtag/\(encodedKeyword)/rss") {
@@ -252,7 +270,7 @@ class ArticleFetchService: ObservableObject {
         }
         
         // 4. PR TIMES (キーワードごとに個別のRSSが存在するため、上位5キーワード分を追加)
-        if activeRSSSources.contains(.prTimes) {
+        if activeRSSSources.contains(.prTimes) && !isEnglishUI {
             for keyword in activeKeywords.prefix(5) {
                 if let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                    let url = URL(string: "https://prtimes.jp/main/html/rd/index.class.php?action=view_rss&keyword=\(encodedKeyword)") {

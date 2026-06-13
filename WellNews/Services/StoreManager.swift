@@ -23,9 +23,9 @@ enum TipProduct: String, CaseIterable, Identifiable {
     /// 表示名
     var displayName: String {
         switch self {
-        case .coffee: return "コーヒー1杯"
-        case .developer: return "開発サポート"
-        case .cheer: return "応援サポート"
+        case .coffee: return String(localized: "コーヒー1杯")
+        case .developer: return String(localized: "開発サポート")
+        case .cheer: return String(localized: "応援サポート")
         }
     }
     
@@ -41,9 +41,9 @@ enum TipProduct: String, CaseIterable, Identifiable {
     /// 説明文
     var description: String {
         switch self {
-        case .coffee: return "開発者にコーヒーを奢る"
-        case .developer: return "開発者を応援する"
-        case .cheer: return "アプリ開発をさらに応援する"
+        case .coffee: return String(localized: "開発者にコーヒーを奢る")
+        case .developer: return String(localized: "開発者を応援する")
+        case .cheer: return String(localized: "アプリ開発をさらに応援する")
         }
     }
 }
@@ -127,7 +127,7 @@ final class StoreManager {
             logger.info("✅ 商品ロード完了: チップ \(self.tips.count)件, プレミアム \(self.premiumProduct != nil ? "あり" : "なし")")
         } catch {
             logger.error("❌ 商品の読み込みに失敗: \(error.localizedDescription)")
-            errorMessage = "商品情報の取得に失敗しました。"
+            errorMessage = String(localized: "商品情報の取得に失敗しました。")
         }
         
         isLoading = false
@@ -160,7 +160,7 @@ final class StoreManager {
                     
                 case .unverified(_, let error):
                     logger.error("❌ トランザクション検証失敗: \(error.localizedDescription)")
-                    errorMessage = "購入内容の署名検証に失敗しました。"
+                    errorMessage = String(localized: "購入内容の署名検証に失敗しました。")
                 }
                 
             case .userCancelled:
@@ -168,14 +168,14 @@ final class StoreManager {
                 
             case .pending:
                 logger.info("ℹ️ 購入処理が保留中（承認待ちなど）")
-                errorMessage = "購入処理が保留中です。管理者の承認後に反映されます。"
+                errorMessage = String(localized: "購入処理が保留中です。管理者の承認後に反映されます。")
                 
             @unknown default:
                 logger.warning("⚠️ 未知の購入結果")
             }
         } catch {
             logger.error("❌ 購入処理中にエラー発生: \(error.localizedDescription)")
-            errorMessage = "購入処理中にエラーが発生しました。"
+            errorMessage = String(localized: "購入処理中にエラーが発生しました。")
         }
         
         isPurchasing = false
@@ -195,7 +195,7 @@ final class StoreManager {
             purchaseSucceeded = true
         } catch {
             logger.error("❌ 購入復元中にエラー発生: \(error.localizedDescription)")
-            errorMessage = "購入の復元に失敗しました。"
+            errorMessage = String(localized: "購入の復元に失敗しました。")
         }
         
         isLoading = false

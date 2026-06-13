@@ -1,0 +1,1396 @@
+{
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "" : {
+
+    },
+    " " : {
+
+    },
+    "— 気になる情報を、あなたの健やかな毎日へ —" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "— Wellness info for your healthy daily life —"
+          }
+        }
+      }
+    },
+    "・" : {
+
+    },
+    "# %@" : {
+
+    },
+    "%@\n\n%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@\n\n%2$@"
+          }
+        }
+      }
+    },
+    "%@（買い切り・永久有効）" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ (One-time purchase / Lifetime validity)"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "%lld%%" : {
+
+    },
+    "•" : {
+
+    },
+    "※ 開発者支援チップについて" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "* About Developer Support Tips"
+          }
+        }
+      }
+    },
+    "0.8x" : {
+
+    },
+    "1.0x" : {
+
+    },
+    "1.2x (推奨)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.2x (Recommended)"
+          }
+        }
+      }
+    },
+    "1.5x" : {
+
+    },
+    "2.0x" : {
+
+    },
+    "AI" : {
+
+    },
+    "AIが健康情報を分析中..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI is analyzing health information..."
+          }
+        }
+      }
+    },
+    "AIセッションが利用できません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI session is not available"
+          }
+        }
+      }
+    },
+    "AI健康ラジオ (%lld/%lld)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Health Radio (%lld/%lld)"
+          }
+        }
+      }
+    },
+    "AI要約" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Summary"
+          }
+        }
+      }
+    },
+    "AI要約を再生成" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regenerate AI Summary"
+          }
+        }
+      }
+    },
+    "AI要約を再生成中..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regenerating AI Summary..."
+          }
+        }
+      }
+    },
+    "AI要約設定" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Summary Settings"
+          }
+        }
+      }
+    },
+    "Apple Intelligenceが利用できません。デバイスの設定を確認してください。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is not available. Please check your device settings."
+          }
+        }
+      }
+    },
+    "Google ニュース" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google News"
+          }
+        }
+      }
+    },
+    "Hello, world!" : {
+
+    },
+    "note (ノート)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "note"
+          }
+        }
+      }
+    },
+    "PR TIMES" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PR TIMES"
+          }
+        }
+      }
+    },
+    "Premiumプラン" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium Plan"
+          }
+        }
+      }
+    },
+    "URLの生成に失敗しました" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to generate URL"
+          }
+        }
+      }
+    },
+    "WellNews" : {
+
+    },
+    "WellNews Premium" : {
+
+    },
+    "WellNews 健康ニュース" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WellNews Health News"
+          }
+        }
+      }
+    },
+    "WellNewsは個人開発による広告＆課金型アプリです。\nもし日々の健康管理に役立っていると感じていただけましたら、開発を応援していただけると非常に励みになります！" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "WellNews is an independently developed app supported by ads and purchases. If you find it helpful for your daily health management, your support would be highly encouraging!"
+          }
+        }
+      }
+    },
+    "アプリ開発をさらに応援する" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Further support app development"
+          }
+        }
+      }
+    },
+    "いつもWellNewsをご利用いただきありがとうございます！" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you for using WellNews!"
+          }
+        }
+      }
+    },
+    "ウェルネス統計" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wellness Statistics"
+          }
+        }
+      }
+    },
+    "おすすめ度" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevance"
+          }
+        }
+      }
+    },
+    "おすすめ度: %lld%%" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevance: %lld%%"
+          }
+        }
+      }
+    },
+    "おすすめ度の計算に失敗しました: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to calculate relevance: %@"
+          }
+        }
+      }
+    },
+    "カテゴリ分類に失敗しました: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to categorize: %@"
+          }
+        }
+      }
+    },
+    "キーワードが登録されていません。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No keywords registered."
+          }
+        }
+      }
+    },
+    "クリエイタープラットフォーム「note」のハッシュタグから記事を収集します。個人によるリアルな体験談や専門家のコラムなど、ライフスタイルに寄り添った多様な読み物を探すのに最適です。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggregates articles from tags on the creator platform 'note'. Ideal for finding diverse readings that align with your lifestyle, such as personal experiences and expert columns."
+          }
+        }
+      }
+    },
+    "コーヒー1杯" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cup of Coffee"
+          }
+        }
+      }
+    },
+    "こちらは任意の寄付型アイテム（消耗型）です。購入しても広告非表示などのプレミアム機能は有効になりません（プレミアム機能をお求めの場合は「プレミアムプラン」をご購入ください）。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These are optional tips (consumable). Purchasing tips does not unlock premium features like ad-blocking (please purchase the 'Premium Plan' for premium features)."
+          }
+        }
+      }
+    },
+    "この記事はあなたとの関連性が低めです" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This article has low relevance to you"
+          }
+        }
+      }
+    },
+    "この記事はあなたに関連性が高いです" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This article is highly relevant to you"
+          }
+        }
+      }
+    },
+    "この記事はあなたに非常に強くおすすめされます" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This article is highly recommended for you"
+          }
+        }
+      }
+    },
+    "この記事はあなたの設定した関心と一部関連しています" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This article is somewhat relevant to your interests"
+          }
+        }
+      }
+    },
+    "システムデフォルト" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Default"
+          }
+        }
+      }
+    },
+    "しばらくお待ちください" : {
+
+    },
+    "スイッチをオフにすると、そのキーワードに関する検索と記事の取得を一時的に無効化できます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn switches off to temporarily disable searches and article fetching for those keywords."
+          }
+        }
+      }
+    },
+    "すでにプレミアムプランに参加しています" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are already on the Premium Plan"
+          }
+        }
+      }
+    },
+    "すべて" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        }
+      }
+    },
+    "ソーシャルブックマークサービス「はてなブックマーク」で話題になっている記事やブログなどを収集します。ネット上で注目されているトレンドや、体験談・まとめ記事などを探すのに適しています。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggregates articles and blogs trending on Hatena Bookmark. Ideal for finding internet trends, personal stories, and summary articles."
+          }
+        }
+      }
+    },
+    "その他" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        }
+      }
+    },
+    "チェックを入れた配信元から健康ニュースを取得します。すべてオフにすることはできません。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetch health news from checked sources. You must keep at least one enabled."
+          }
+        }
+      }
+    },
+    "チップ情報が見つかりません。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tip information not found."
+          }
+        }
+      }
+    },
+    "テーマ変更、リッチウィジェット機能など、今後追加される予定のすべてのプレミアム機能も追加料金なしで利用できます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get access to all future premium features, such as theme changing and rich widgets, at no extra cost."
+          }
+        }
+      }
+    },
+    "ニュース" : {
+
+    },
+    "ニュース配信元 (RSS)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "News Sources (RSS)"
+          }
+        }
+      }
+    },
+    "はてなブックマーク" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hatena Bookmark"
+          }
+        }
+      }
+    },
+    "ひとことで言うと" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In a nutshell"
+          }
+        }
+      }
+    },
+    "ブックマーク" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bookmarks"
+          }
+        }
+      }
+    },
+    "ブックマークした記事がありません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No bookmarked articles"
+          }
+        }
+      }
+    },
+    "プレスリリース配信サービス「PR TIMES」から新着リリースを収集します。ヘルスケア分野 of 新しいサービス、睡眠グッズ、健康食品などの新商品情報や最新のビジネトレンドをいち早くキャッチできます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggregates new releases from the press release distribution service 'PR TIMES'. Catch the latest information on new healthcare services, sleep gear, and health foods."
+          }
+        }
+      }
+    },
+    "プレスリリース配信サービス「PR TIMES」から新着リリースを収集します。ヘルスケア分野の新しいサービス、睡眠グッズ、健康食品などの新商品情報や最新のビジネトレンドをいち早くキャッチできます。" : {
+
+    },
+    "プレミアム & 支援" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium & Support"
+          }
+        }
+      }
+    },
+    "プレミアムに参加する" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join Premium"
+          }
+        }
+      }
+    },
+    "プレミアムプラン" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium Plan"
+          }
+        }
+      }
+    },
+    "メンタルケア" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mental Care"
+          }
+        }
+      }
+    },
+    "一時停止" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause"
+          }
+        }
+      }
+    },
+    "世界中の多様な報道メディアから最新のニュース記事を網羅的に収集します。特定の健康キーワードに関する客観的で信頼性の高い報道を幅広くキャッチするのに最適です。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggregates the latest news articles comprehensively from a variety of news media worldwide. Ideal for catching a wide range of objective and reliable coverage on specific health keywords."
+          }
+        }
+      }
+    },
+    "今後の追加特典も自動付与" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Future Premium Features"
+          }
+        }
+      }
+    },
+    "今日からできるアクション" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Action to take starting today"
+          }
+        }
+      }
+    },
+    "今日のウェルネスニュースは以上です。健康的な一日をお過ごしください。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That's all for today's wellness news. Have a healthy day."
+          }
+        }
+      }
+    },
+    "他のカテゴリを選択してください" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please select another category"
+          }
+        }
+      }
+    },
+    "健康キーワードの無制限登録" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited Keywords"
+          }
+        }
+      }
+    },
+    "健康ニュースをもっと快適に、もっと深く" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read health news more comfortably and deeply"
+          }
+        }
+      }
+    },
+    "健康ニュースを取得中..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching health news..."
+          }
+        }
+      }
+    },
+    "健康ラジオ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Radio"
+          }
+        }
+      }
+    },
+    "健康ラジオ 連続再生の無制限化" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlimited Health Radio"
+          }
+        }
+      }
+    },
+    "健康記事がありません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No health articles available"
+          }
+        }
+      }
+    },
+    "健康追跡キーワード" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tracked Keywords"
+          }
+        }
+      }
+    },
+    "元の記事を読む" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Original Article"
+          }
+        }
+      }
+    },
+    "公式サイト" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official Site"
+          }
+        }
+      }
+    },
+    "再試行" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        }
+      }
+    },
+    "再読み込み" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reload"
+          }
+        }
+      }
+    },
+    "商品情報の取得に失敗しました。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load product information."
+          }
+        }
+      }
+    },
+    "商品情報を取得中..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching product info..."
+          }
+        }
+      }
+    },
+    "商品情報を読み込み中..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading products..."
+          }
+        }
+      }
+    },
+    "基本速度" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reading Speed"
+          }
+        }
+      }
+    },
+    "基本速度や声の種類を変更できます。日本語の高品質なSiri音声がインストールされている場合、ここに表示されます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change the reading speed and voice. High-quality Siri voices installed on your device will appear here."
+          }
+        }
+      }
+    },
+    "声の種類" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Type"
+          }
+        }
+      }
+    },
+    "完全広告非表示" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad-Free Experience"
+          }
+        }
+      }
+    },
+    "広告" : {
+
+    },
+    "広告を読み込み中..." : {
+
+    },
+    "役立つ記事を見つけたら詳細画面でブックマークしましょう" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find helpful articles and bookmark them from the details screen"
+          }
+        }
+      }
+    },
+    "応援サポート" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cheer Support"
+          }
+        }
+      }
+    },
+    "新しいキーワード (例: ヨガ)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New keyword (e.g. Yoga)"
+          }
+        }
+      }
+    },
+    "既読記事数" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Articles"
+          }
+        }
+      }
+    },
+    "有効" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active"
+          }
+        }
+      }
+    },
+    "標準 (2〜3文)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium (2-3 sentences)"
+          }
+        }
+      }
+    },
+    "気になる健康トピック（ヨガ、高血圧、睡眠等）を最大10個の制限なく、何個でも登録・追跡できます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register and track as many health topics (yoga, hypertension, sleep, etc.) as you want without the 10-keyword limit."
+          }
+        }
+      }
+    },
+    "現在商品情報を取得できません。時間をおいて再度お試しください。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not retrieve product information. Please try again later."
+          }
+        }
+      }
+    },
+    "睡眠・休養" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sleep & Rest"
+          }
+        }
+      }
+    },
+    "簡潔 (1〜2文)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Short (1-2 sentences)"
+          }
+        }
+      }
+    },
+    "要点のまとめ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Points"
+          }
+        }
+      }
+    },
+    "要約の生成に失敗しました: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to generate summary: %@"
+          }
+        }
+      }
+    },
+    "要約の長さ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summary Length"
+          }
+        }
+      }
+    },
+    "要約の長さを変更した場合、新しく記事を取得するか、記事詳細で「AI要約を再生成」を実行すると適用されます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you change the summary length, it will apply when you fetch new articles or run 'Regenerate AI Summary' in the article detail view."
+          }
+        }
+      }
+    },
+    "要約を生成できません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot generate summary"
+          }
+        }
+      }
+    },
+    "要約を生成できませんでした" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to generate summary"
+          }
+        }
+      }
+    },
+    "記事の概要" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Article Description"
+          }
+        }
+      }
+    },
+    "記事を共有" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Article"
+          }
+        }
+      }
+    },
+    "記事一覧のインライン広告やブックマーク画面のバナーなど、すべての広告を非表示にして読書に集中できます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove all inline ads in lists and banners in bookmarks, allowing you to focus on reading."
+          }
+        }
+      }
+    },
+    "記事詳細" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Article Details"
+          }
+        }
+      }
+    },
+    "設定" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "設定画面でキーワードを追加するか、引っ張って更新してください" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add keywords in settings or pull to refresh"
+          }
+        }
+      }
+    },
+    "該当する健康記事がありません" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No matching health articles found"
+          }
+        }
+      }
+    },
+    "詳細 (4〜5文)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detailed (4-5 sentences)"
+          }
+        }
+      }
+    },
+    "購入の復元に失敗しました。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to restore purchases."
+          }
+        }
+      }
+    },
+    "購入内容の署名検証に失敗しました。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to verify the signature of your purchase."
+          }
+        }
+      }
+    },
+    "購入処理が保留中です。管理者の承認後に反映されます。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase is pending approval."
+          }
+        }
+      }
+    },
+    "購入処理中にエラーが発生しました。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred during the purchase process."
+          }
+        }
+      }
+    },
+    "購入情報を復元（リストア）" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        }
+      }
+    },
+    "通常最大5記事のところ、制限なくすべての記事を続けて聴き流せるようになり、長時間のウォーキングや家事に最適です。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen to all articles consecutively without limits (default max 5), perfect for long walks or chores."
+          }
+        }
+      }
+    },
+    "連続再生" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuous Play"
+          }
+        }
+      }
+    },
+    "運動" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exercise"
+          }
+        }
+      }
+    },
+    "選択したカテゴリの記事がフィードで優先的におすすめされます（高スコア判定）。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Articles in selected categories will be prioritized in your feed (higher scores)."
+          }
+        }
+      }
+    },
+    "閉じる" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
+    },
+    "開発サポート" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developer Support"
+          }
+        }
+      }
+    },
+    "開発者にコーヒーを奢る" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy the developer a coffee"
+          }
+        }
+      }
+    },
+    "開発者を応援する" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support the developer"
+          }
+        }
+      }
+    },
+    "開発者を支援する" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support the Developer"
+          }
+        }
+      }
+    },
+    "開発者支援" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developer Support"
+          }
+        }
+      }
+    },
+    "関心のあるカテゴリ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categories of Interest"
+          }
+        }
+      }
+    },
+    "音声で聴く" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen"
+          }
+        }
+      }
+    },
+    "音声読み上げ設定" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speech Settings"
+          }
+        }
+      }
+    },
+    "食事・栄養" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diet & Nutrition"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

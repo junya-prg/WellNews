@@ -44,29 +44,29 @@ struct PremiumStoreView: View {
                         FeatureRow(
                             icon: "eye.slash.fill",
                             color: .blue,
-                            title: "完全広告非表示",
-                            description: "記事一覧のインライン広告やブックマーク画面のバナーなど、すべての広告を非表示にして読書に集中できます。"
+                            title: String(localized: "完全広告非表示"),
+                            description: String(localized: "記事一覧のインライン広告やブックマーク画面のバナーなど、すべての広告を非表示にして読書に集中できます。")
                         )
                         
                         FeatureRow(
                             icon: "play.circle.fill",
                             color: .purple,
-                            title: "健康ラジオ 連続再生の無制限化",
-                            description: "通常最大5記事のところ、制限なくすべての記事を続けて聴き流せるようになり、長時間のウォーキングや家事に最適です。"
+                            title: String(localized: "健康ラジオ 連続再生の無制限化"),
+                            description: String(localized: "通常最大5記事のところ、制限なくすべての記事を続けて聴き流せるようになり、長時間のウォーキングや家事に最適です。")
                         )
                         
                         FeatureRow(
                             icon: "tag.fill",
                             color: .green,
-                            title: "健康キーワードの無制限登録",
-                            description: "気になる健康トピック（ヨガ、高血圧、睡眠等）を最大10個の制限なく、何個でも登録・追跡できます。"
+                            title: String(localized: "健康キーワードの無制限登録"),
+                            description: String(localized: "気になる健康トピック（ヨガ、高血圧、睡眠等）を最大10個の制限なく、何個でも登録・追跡できます。")
                         )
                         
                         FeatureRow(
                             icon: "sparkles",
                             color: .indigo,
-                            title: "今後の追加特典も自動付与",
-                            description: "テーマ変更、リッチウィジェット機能など、今後追加される予定のすべてのプレミアム機能も追加料金なしで利用できます。"
+                            title: String(localized: "今後の追加特典も自動付与"),
+                            description: String(localized: "テーマ変更、リッチウィジェット機能など、今後追加される予定のすべてのプレミアム機能も追加料金なしで利用できます。")
                         )
                     }
                     .padding(.horizontal)

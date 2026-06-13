@@ -35,7 +35,7 @@ struct SettingsView: View {
                 Section(header: Text("ウェルネス統計")) {
                     HStack(spacing: 16) {
                         StatCard(
-                            title: "既読記事数",
+                            title: String(localized: "既読記事数"),
                             value: "\(tracker.totalReadCount)",
                             icon: "checkmark.circle.fill",
                             color: .green,
@@ -43,7 +43,7 @@ struct SettingsView: View {
                         )
                         
                         StatCard(
-                            title: "ブックマーク",
+                            title: String(localized: "ブックマーク"),
                             value: "\(tracker.totalBookmarkCount)",
                             icon: "bookmark.fill",
                             color: .yellow,

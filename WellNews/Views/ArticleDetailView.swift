@@ -91,7 +91,7 @@ struct ArticleDetailView: View {
                                     } else {
                                         Image(systemName: "arrow.clockwise")
                                     }
-                                    Text(isRegeneratingSummary ? "AI要約を再生成中..." : "AI要約を再生成")
+                                    Text(isRegeneratingSummary ? String(localized: "AI要約を再生成中...") : String(localized: "AI要約を再生成"))
                                 }
                                 .font(.caption)
                                 .fontWeight(.semibold)
@@ -210,7 +210,7 @@ struct AISummarySection: View {
     @ObservedObject private var speechManager = SpeechManager.shared
     
     private var headerTitle: String {
-        isAIGenerated ? "AI要約" : "記事の概要"
+        isAIGenerated ? String(localized: "AI要約") : String(localized: "記事の概要")
     }
     
     private var headerIcon: String {
@@ -251,7 +251,7 @@ struct AISummarySection: View {
                     
                     HStack(spacing: 4) {
                         Image(systemName: isSpeaking ? "pause.fill" : "play.fill")
-                        Text(isSpeaking ? "一時停止" : "音声で聴く")
+                        Text(isSpeaking ? String(localized: "一時停止") : String(localized: "音声で聴く"))
                     }
                     .font(.caption)
                     .fontWeight(.bold)
@@ -436,7 +436,7 @@ struct DigestView: View {
                 .padding(.top, 2)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("今日からできるアクション")
+                Text(String(localized: "今日からできるアクション"))
                     .font(.caption)
                     .fontWeight(.bold)
                     .foregroundStyle(actionColor)
@@ -591,13 +591,13 @@ struct RelevanceScoreSection: View {
     private var scoreDescription: String {
         switch percentage {
         case 80...100:
-            return "この記事はあなたに非常に強くおすすめされます"
+            return String(localized: "この記事はあなたに非常に強くおすすめされます")
         case 60..<80:
-            return "この記事はあなたに関連性が高いです"
+            return String(localized: "この記事はあなたに関連性が高いです")
         case 40..<60:
-            return "この記事はあなたの設定した関心と一部関連しています"
+            return String(localized: "この記事はあなたの設定した関心と一部関連しています")
         default:
-            return "この記事はあなたとの関連性が低めです"
+            return String(localized: "この記事はあなたとの関連性が低めです")
         }
     }
     
@@ -653,7 +653,7 @@ struct OpenArticleButton: View {
         Button(action: action) {
             HStack {
                 Image(systemName: "safari")
-                Text("元の記事を読む")
+                Text(String(localized: "元の記事を読む"))
                 Spacer()
                 Image(systemName: "arrow.up.right.square")
             }
@@ -679,7 +679,7 @@ struct ShareButton: View {
         ) {
             HStack {
                 Image(systemName: "square.and.arrow.up")
-                Text("記事を共有")
+                Text(String(localized: "記事を共有"))
                 Spacer()
             }
             .font(.headline)
